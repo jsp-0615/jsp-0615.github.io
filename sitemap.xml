@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jsp-0615.github.io/problemNotes/2025/04/12/SQL44/</loc>
+    
+    <lastmod>2025-04-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jsp-0615.github.io/knowledgeNotes/2025/04/12/my-first-blog/</loc>
     
     <lastmod>2025-04-12</lastmod>
@@ -30,6 +39,13 @@
   
   <url>
     <loc>https://jsp-0615.github.io/categories/knowledgeNotes/</loc>
+    <lastmod>2025-04-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jsp-0615.github.io/categories/problemNotes/</loc>
     <lastmod>2025-04-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
