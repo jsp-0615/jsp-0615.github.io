@@ -1,2 +1,2 @@
-http://example.com/knowledgeNotes/undefined.html
-http://example.com/
+https://jsp-0615.github.io/2025/04/12/my-first-blog.html
+https://jsp-0615.github.io/
