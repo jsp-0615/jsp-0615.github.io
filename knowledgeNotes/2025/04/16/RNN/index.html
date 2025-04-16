@@ -68,14 +68,16 @@
         window.jsi_config = jsi_config;
     })()
 </script>
-<meta name="generator" content="Hexo 7.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 <body>
 <div id="nav">
     <nav class="nav-menu">
         <a class="site-name current" href="/" title="JSM">JSM</a>
-        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>Home</span></a>
-        <a href="/archives" title="Archives"><i class="fa fa-archives"></i><span>Archives</span></a>
-        <a href="/tags" title="Tags"><i class="fa fa-tags"></i><span>Tags</span></a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
         <!-- custom single page of menus -->
         
         
@@ -123,7 +125,7 @@
 
             <div class="page-title">
     <ul>
-        <li><a href="/">Latest</a></li>
+        <li><a href="/">最新</a></li>
         
             
                 <li class="">
@@ -148,7 +150,7 @@
         <input type="text"
                readonly="readonly"
                id="local-search-input-tip"
-               placeholder="Press Shift to Search" />
+               placeholder="按Shift启动搜索" />
         <button type="button" aria-label="fa-search" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
     </form>
 </li>
@@ -162,9 +164,9 @@
                 <a class="avatar fleft" target="_blank" href="https://github.com/jsp-0615" rel="author noopener">
                     <img width="48" src="/images/avatar.webp" alt="avatar" itemprop="image"/>
                 </a>
-                <p><span class="label">Author</span>
+                <p><span class="label">作者</span>
                     <a target="_blank" rel="noopener" href="https://github.com/jsp-0615" itemprop="url"><span itemprop="name">Jasper</span></a>
-                    <span itemprop="datePublished" content="2025-04-16T21:47:45.211+10:00">Last edited at&nbsp;2025-04-16</span>
+                    <span itemprop="datePublished" content="2025-04-16T21:47:45.211+10:00">最后编辑于&nbsp;2025-04-16</span>
                 </p>
                 <p itemprop="description">一个学习记录网站</p>
             </div>
@@ -172,15 +174,15 @@
                 <a target="_self" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/16/RNN/" itemprop="mainEntityOfPage"><span itemprop="headline">RNN</span></a>
             </h1>
             <div class="post-meta" itemprop="wordCount">
-                emm... 4178 words in the article |
+                本文共计4178个字 |
                 <span id="busuanzi_container_page_pv">
-                    you are the&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>th visited person
+                    你是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位到访读者
                 </span>
             </div>
         </div>
         <div class="post-content markdown-body articleBody" itemprop="articleBody">
             <h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><p>Recurrent Neural Network是一种具有循环结构的神经网络，能够处理序列数据，与传统的前馈神经网络不同，RNN通过将当前时刻的输出与前一时刻的状态（或叫做隐藏层）作为输入传递到下一个时刻，使得它能保留之前的信息并用于当前的决策</p>
-<p><img src="D:\blog\source_posts\RNN\1HgAY1lLMYSANqtgTgwWeXQ.png" alt="img"></p>
+<p><img src="D:\blog\source\images\1HgAY1lLMYSANqtgTgwWeXQ.png" alt="img"></p>
 <p><strong>输入层</strong>：输入数据的每一时刻（如时间序列数据的每个时间步）都会传递到网络</p>
 <p><strong>隐藏层</strong>：RNN的核心是循环结构，它将先前的隐藏状态与当前的输入结合，生成当前的隐藏状态。通常，RNN的隐藏层包含多个神经元，且它们的状态是由上一时刻的输出状态递归计算得来的。</p>
 <p><strong>输出层</strong>：基于隐藏层的输出，生成预测结果。</p>
@@ -201,7 +203,7 @@
 <p>many-to-one：分类问题，比如说：情感分析，给定一段话，输出这段话的情况是positive还是negative</p>
 <p>第一个many-to-many：机器翻译，语言模型</p>
 <p>第二个many-to-many：命名实体识别（NER），词性标注（POS Tagging）</p>
-<p><img src="D:\blog\source_posts\RNN\various_rnn.png" alt="various_rnn"></p>
+<p><img src="D:\blog\source\images\various_rnn.png" alt="various_rnn"></p>
 <h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><p>RNN的反向传播(Backpropagation Through Time,BPTT)是它的核心部分，核心思路是展开时间维度做反向传播，由于RNN会在每个时间步共享参数，在做反向传播时要沿着时间轴展开整个网络</p>
 <p>设loss为总损失: $L&#x3D;\sum_{t&#x3D;1}^TL_t&#x3D;\sum_{t&#x3D;1}^TCrossEntropy(y_t,\hat y_t)$</p>
 <blockquote>
@@ -272,7 +274,7 @@
         
 
         
-        <div class="post-tags">Tags：
+        <div class="post-tags">标签：
             
             <a href="/tags/notes/">notes</a>
             
@@ -280,7 +282,7 @@
         
     </article>
     
-        <p style="text-align: center">Warning: 本文内容由Jasper创作整理，读者若需转载，请保留出处，谢谢！</p>
+        <p style="text-align: center">声明: 本文内容由Jasper创作整理，读者若需转载，请保留出处，谢谢！</p>
     
     
     
@@ -291,12 +293,12 @@
     <footer class="footer">
     <div class="footer-inner" style="text-align: center">
         <p>
-            Has been established&nbsp;<a href="/about" id="siteBuildingTime"></a>&nbsp;Days， <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span><br/>
-            ©2025-<span id="cpYear"></span> Based on&nbsp;<a href="http://hexo.io" target="_blank" rel="external nofollow noopener" title="Hexo">Hexo</a>
-            ，Theme by&nbsp;&nbsp;<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="external nofollow noopener" title="JSimple theme">JSimple</a>
-            ，Author&nbsp;<a href="https://github.com/jsp-0615" target="_blank" title="author">Jasper</a>
-            ，Hosted&nbsp;<a href="https://pages.github.com" target="_blank" rel="external nofollow noopener" title="github">github</a>
-            ，<a href="https://jsp-0615.github.io/sitemap.xml" title="SiteMap" rel="alternate" type="application/xml">SiteMap</a>
+            本站已建立&nbsp;<a href="/about" id="siteBuildingTime"></a>&nbsp;天， <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span><br/>
+            ©2025-<span id="cpYear"></span> 基于&nbsp;<a href="http://hexo.io" target="_blank" rel="external nofollow noopener" title="Hexo">Hexo</a>
+            ，主题采用&nbsp;&nbsp;<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="external nofollow noopener" title="JSimple theme">JSimple</a>
+            ，作者&nbsp;<a href="https://github.com/jsp-0615" target="_blank" title="author">Jasper</a>
+            ，托管于&nbsp;<a href="https://pages.github.com" target="_blank" rel="external nofollow noopener" title="github">github</a>
+            ，<a href="https://jsp-0615.github.io/sitemap.xml" title="网站地图" rel="alternate" type="application/xml">网站地图</a>
         </p>
     </div>
 </footer>
@@ -315,7 +317,7 @@
                    spellcheck="true"
                    type="text"
                    autocomplete="off"
-                   placeholder="Input query keywords here..."/>
+                   placeholder="请输入查询关键词"/>
         </div>
     </div>
     <div id="local-search-result"></div>
