@@ -1,0 +1,583 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-Hans">
+<head>
+    <!--[if lte IE 9]>
+    <meta http-equiv="refresh" content="0;url=https://jsp-0615.github.io/warn.html">
+<![endif]-->
+
+<meta charset="utf-8" />
+<title>a/b test | Jasper自学笔记</title>
+<meta name="keywords" content="" />
+<meta name="description" content="因果推断因果阶梯：
+Association P(y|X)
+how seeing X
+
+Simpson’s Paradox(辛普森悖论)揭示了聚合数据和分组数据之间可能存在方向相反的结论
+当对不同子组分别进行分析时，一个趋势是存在的，但当将这些子组数据合并后，趋势可能消失或反转。
+产生的原因： 人群分布在混淆变量上不一致，导致相关关系完全可以被扭曲
+解决的方式：取决于因果图，forks的话要分层，c" />
+<meta name="author" content="Jasper" />
+<meta name="applicable-device" content="pc,mobile" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Jasper自学笔记" />
+<meta name="renderer" content="webkit" />
+<meta name="force-rendering" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="a/b test | Jasper自学笔记" />
+<meta property="og:description" content="因果推断因果阶梯：
+Association P(y|X)
+how seeing X
+
+Simpson’s Paradox(辛普森悖论)揭示了聚合数据和分组数据之间可能存在方向相反的结论
+当对不同子组分别进行分析时，一个趋势是存在的，但当将这些子组数据合并后，趋势可能消失或反转。
+产生的原因： 人群分布在混淆变量上不一致，导致相关关系完全可以被扭曲
+解决的方式：取决于因果图，forks的话要分层，c" />
+<meta property="og:url" content="https://jsp-0615.github.io" />
+<meta property="og:site_name" content="Jasper自学笔记" />
+
+<link rel="dns-prefetch" href="https://jsp-0615.github.io" />
+<link rel="preconnect" href="https://jsp-0615.github.io" />
+
+    <link rel="preconnect" href="https://.disqus.com" />
+    <link rel="preconnect" href="https://c.disquscdn.com" />
+
+
+<link rel="icon" type="image/svg+xml" href="https://jsp-0615.github.io/images/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="https://jsp-0615.github.io/images/favicon.png" />
+<link rel="alternate" type="application/xml" title="Site Map" href="https://jsp-0615.github.io/sitemap.xml"/>
+<link rel="canonical" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/14/causal-inference/" />
+
+
+<link rel="stylesheet" href="/css/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" media="print" onload="this.media='all'" crossorigin />
+<link rel="stylesheet" href="/css/JSimple.min.css" />
+
+<style id="highl_css"></style>
+
+<script type="text/javascript">
+    (function() {
+        let jsi_config = {
+            isPost: 'true',
+            creationTime: '12/04/2025',
+            highlightTheme: 'atom-one',
+            readMode: 'day',
+            chatLink: '',
+            localSearch: { dbPath: '' }
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        window.jsi_config = jsi_config;
+    })()
+</script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="JSM">JSM</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/about" title="About">
+            <i class="fa fa-question-circle"></i>
+            <span>About</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#" aria-label="content searching link"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#" aria-label="reading mode chang"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" src="/images/cover-day.webp" alt="cover-img" loading="lazy"/>
+    <div class="cover-info">
+        <img class="avatar" src="/images/avatar.webp" width="100" alt="avatar" loading="lazy"/>
+        <h1>Jasper知识库</h1>
+        <h3></h3>
+        <h4>全栈DS/DA工程师养成记</h4>
+        <div class="cover-sns">
+            
+    <div class="btn btn-github">
+        <a href="https://github.com/jsp-0615" title="github" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+    <div class="btn btn-youtube">
+        <a href="" title="youtube" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-youtube"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最新</a></li>
+        
+            
+                <li class="">
+                    <a href="/categories/knowledgeNotes" data-name="知识笔记">知识笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/outcomes" data-name="成果展示">成果展示</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/problemNotes" data-name="问题笔记">问题笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/grocery" data-name="杂货铺">杂货铺</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="按Shift启动搜索" />
+        <button type="button" aria-label="fa-search" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix" itemscope itemtype="https://schema.org/Person">
+                <a class="avatar fleft" target="_blank" href="https://github.com/jsp-0615" rel="author noopener">
+                    <img width="48" src="/images/avatar.webp" alt="avatar" itemprop="image"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a target="_blank" rel="noopener" href="https://github.com/jsp-0615" itemprop="url"><span itemprop="name">Jasper</span></a>
+                    <span itemprop="datePublished" content="2025-04-14T19:39:38.580+10:00">最后编辑于&nbsp;2025-04-14</span>
+                </p>
+                <p itemprop="description">一个学习记录网站</p>
+            </div>
+            <h1 class="post-title">
+                <a target="_self" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/14/causal-inference/" itemprop="mainEntityOfPage"><span itemprop="headline">A/B Test</span></a>
+            </h1>
+            <div class="post-meta" itemprop="wordCount">
+                本文共计3806个字 |
+                <span id="busuanzi_container_page_pv">
+                    你是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位到访读者
+                </span>
+            </div>
+        </div>
+        <div class="post-content markdown-body articleBody" itemprop="articleBody">
+            <h1 id="因果推断"><a href="#因果推断" class="headerlink" title="因果推断"></a>因果推断</h1><h2 id="因果阶梯："><a href="#因果阶梯：" class="headerlink" title="因果阶梯："></a>因果阶梯：</h2><ol>
+<li>Association P(y|X)</li>
+<li>how seeing X</li>
+</ol>
+<h2 id="Simpson’s-Paradox-辛普森悖论"><a href="#Simpson’s-Paradox-辛普森悖论" class="headerlink" title="Simpson’s Paradox(辛普森悖论)"></a>Simpson’s Paradox(辛普森悖论)</h2><p>揭示了<strong>聚合数据</strong>和<strong>分组数据</strong>之间可能存在方向相反的结论</p>
+<p>当对不同子组分别进行分析时，一个趋势是存在的，但当将这些子组数据<strong>合并</strong>后，趋势可能<strong>消失或反转</strong>。</p>
+<p>产生的原因： 人群分布在混淆变量上不一致，导致相关关系完全可以被扭曲</p>
+<p>解决的方式：取决于因果图，forks的话要分层，collider的话就不要分层</p>
+<h3 id="Ex1-：UC-Berkeley-gender-bias"><a href="#Ex1-：UC-Berkeley-gender-bias" class="headerlink" title="Ex1 ：UC Berkeley gender bias."></a>Ex1 ：UC Berkeley gender bias.</h3><p>Graduate admissions to UC Berkeley(Fall 1973)</p>
+<p>​						University-level Data</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Men</th>
+<th></th>
+<th>Women</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>Applicants</td>
+<td>Admitted</td>
+<td>Applicants</td>
+<td>Admitted</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>8442</td>
+<td>44%</td>
+<td>4321</td>
+<td>35%</td>
+</tr>
+</tbody></table>
+<p>-&gt;  University-level data shows bias in favor of men</p>
+<p>​						Department level Data</p>
+<table>
+<thead>
+<tr>
+<th>Department</th>
+<th>MEN</th>
+<th></th>
+<th>women</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>Applicants</td>
+<td>Admitted</td>
+<td>Applicants</td>
+<td>Admitted</td>
+</tr>
+<tr>
+<td>A</td>
+<td>825</td>
+<td>62%</td>
+<td>108</td>
+<td>82%</td>
+</tr>
+<tr>
+<td>B</td>
+<td>560</td>
+<td>63%</td>
+<td>25</td>
+<td>68%</td>
+</tr>
+<tr>
+<td>C</td>
+<td>325</td>
+<td>37%</td>
+<td>593</td>
+<td>34%</td>
+</tr>
+<tr>
+<td>D</td>
+<td>417</td>
+<td>33%</td>
+<td>375</td>
+<td>35%</td>
+</tr>
+<tr>
+<td>E</td>
+<td>191</td>
+<td>28%</td>
+<td>393</td>
+<td>24%</td>
+</tr>
+<tr>
+<td>F</td>
+<td>373</td>
+<td>6%</td>
+<td>341</td>
+<td>7%</td>
+</tr>
+</tbody></table>
+<p>-&gt;  Department-level data shows bias in favor of women</p>
+<h3 id="Ex2-Treatment-Effect"><a href="#Ex2-Treatment-Effect" class="headerlink" title="Ex2: Treatment Effect"></a>Ex2: Treatment Effect</h3><p>-&gt; Subpopulation data:</p>
+<p>​								Men</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Not recovered</th>
+<th>recovered</th>
+<th>TOTAL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Treat</td>
+<td>6</td>
+<td>81</td>
+<td>87</td>
+</tr>
+<tr>
+<td>No Treat</td>
+<td>36</td>
+<td>234</td>
+<td>270</td>
+</tr>
+</tbody></table>
+<p>P(Recovered|Treat)&#x3D;81&#x2F;87&#x3D;0.93  ①</p>
+<p>P(Recovered|No Treat)&#x3D;234&#x2F;270&#x3D;0.87 ②</p>
+<p>​								Women</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Not recovered</th>
+<th>recovered</th>
+<th>TOTAL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Treat</td>
+<td>71</td>
+<td>192</td>
+<td>263</td>
+</tr>
+<tr>
+<td>No Treat</td>
+<td>25</td>
+<td>55</td>
+<td>80</td>
+</tr>
+</tbody></table>
+<p>P(Recovered|Treat)&#x3D;192&#x2F;263&#x3D;0.73  ③</p>
+<p>P(Recovered|No Treat)&#x3D;55&#x2F;80&#x3D;0.69 ④</p>
+<p>-&gt;Population Data:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Not recovered</th>
+<th>recovered</th>
+<th>TOTAL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Treat</td>
+<td>77</td>
+<td>273</td>
+<td>350</td>
+</tr>
+<tr>
+<td>No Treat</td>
+<td>61</td>
+<td>289</td>
+<td>350</td>
+</tr>
+</tbody></table>
+<p>P(Recovered|Treat)&#x3D;273&#x2F;350&#x3D;0.78 A</p>
+<p>P(Recovered|No Treat)&#x3D;289&#x2F;350&#x3D;0.83 B</p>
+<p>what we observe is on the population data -&gt; A&lt;B</p>
+<p>but on the subpopulation data -&gt; Men ①&gt;②; Women ③&gt;④</p>
+<p>paradox: The data says if the gender is known, we consider that treatment has effect, but if the gender is unknown, the treatment doesn’t work.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>X</th>
+<th>Y</th>
+<th>Z</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>women</td>
+<td>Not Recovered</td>
+<td>No Treat</td>
+</tr>
+<tr>
+<td>1</td>
+<td>men</td>
+<td>Recovered</td>
+<td>Treat</td>
+</tr>
+</tbody></table>
+<p>subpopulation data:</p>
+<table>
+<thead>
+<tr>
+<th>Men(X&#x3D;1)</th>
+<th></th>
+<th>eSTIMATE PROBABILITY</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Treat(Z&#x3D;1)</td>
+<td>P(Y&#x3D;1|X&#x3D;1,Z&#x3D;1)&#x3D;0.93</td>
+<td>①</td>
+<td></td>
+</tr>
+<tr>
+<td>NOT Treat(Z&#x3D;0)</td>
+<td>P(Y&#x3D;1|X&#x3D;1,Z&#x3D;0)&#x3D;0.87</td>
+<td>②</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>WOMEN(X&#x3D;0)</th>
+<th></th>
+<th>eSTIMATE PROBABILITY</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Treat(Z&#x3D;1)</td>
+<td>P(Y&#x3D;1|X&#x3D;0,Z&#x3D;1)&#x3D;0.73</td>
+<td>③</td>
+<td></td>
+</tr>
+<tr>
+<td>NOT Treat(Z&#x3D;0)</td>
+<td>P(Y&#x3D;1|X&#x3D;0,Z&#x3D;0)&#x3D;0.69</td>
+<td>④</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>eSTIMATE PROBABILITY</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Treat(Z&#x3D;1)</td>
+<td>P(Y&#x3D;1|Z&#x3D;1)&#x3D;0.78</td>
+<td>A</td>
+<td></td>
+</tr>
+<tr>
+<td>NOT Treat(Z&#x3D;0)</td>
+<td>P(Y&#x3D;1|Z&#x3D;0)&#x3D;0.83</td>
+<td>B</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>P(Y&#x3D;1|Z&#x3D;1)&#x3D;P(Y&#x3D;1|X&#x3D;1,Z&#x3D;1)P(X&#x3D;1|Z&#x3D;1)+P(Y&#x3D;1|X&#x3D;0,Z&#x3D;1)P(X&#x3D;0|Z&#x3D;1)</p>
+<p>P(Y&#x3D;1|Z&#x3D;0)&#x3D;P(Y&#x3D;1|X&#x3D;1,Z&#x3D;0)P(X&#x3D;1|Z&#x3D;0)+P(Y&#x3D;1|X&#x3D;0,Z&#x3D;0)P(X&#x3D;0|Z&#x3D;0)</p>
+<p>令P(X&#x3D;1|Z&#x3D;1) 为q 则P(X&#x3D;0|Z&#x3D;1)为(1-q) $q\in(0,1)$</p>
+<p>令P(X&#x3D;1|Z&#x3D;0) 为$q’$ 则P(X&#x3D;0|Z&#x3D;0)为(1-q’) $q’\in(0,1)$</p>
+<p>则 A&#x3D;①q+③(1-q) $q\in(0,1)$</p>
+<p>B&#x3D;②q’+④(1-q’) $q’\in(0,1)$</p>
+<p>要使结果出现A&lt;B的情况：</p>
+<ol>
+<li><p>(1-q)的值大导致A的值趋向于③，是比①小的，从而导致了一个较小的A，同时(1-q)&#x3D;P(X&#x3D;0|Z&#x3D;1)是个条件概率是讲治疗的人里面女性的概率，它大说明大多数的治疗的人是女性</p>
+</li>
+<li><p>同时①&lt;③，即女性无论治疗不治疗恢复都要比男性差</p>
+</li>
+</ol>
+<p>同时满足这两个条件才可能出现反转的效果，即性别即会影响是否去治疗，同时也影响恢复情况</p>
+<img src="causal-inference/image-20250414231146818.png">
+
+<h3 id="Ex3："><a href="#Ex3：" class="headerlink" title="Ex3："></a>Ex3：</h3><p>给1500人用TreatmentA，550人用B看致死率，但本身病人的情况有轻重之分</p>
+ <img src="causal-inference/CI_basic_1.png">
+
+<p>现象：subpopulation之后结论是B致死率更高，但是total的时候是A更好</p>
+<p>造成的原因是unequal weighting：重症的人得到了更多得B，导致B看起来效果不好了⇒总体得结论是一个有偏的加权平均</p>
+<ul>
+<li>Treatment A的致死率计算里面，轻症的致死率全重大，所以致死率小</li>
+<li>Treatment B的致死率计算里面，重症的致死率全重大，所以致死率大</li>
+</ul>
+<p>正确的解释：Either treatment A or treatment B could be the right answer, depending on 数据的因果结构!</p>
+<ul>
+<li>condition is a cause of the treatment</li>
+</ul>
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="causal-inference/CI_basic_2.png" style="max-width: 45%;">
+  <img src="causal-inference/CI_basic_3.png" style="max-width: 45%;">
+</div>
+
+<p>​			比如医生把B专门用在重症，轻症的给A就行</p>
+<p>​			选择：这种情况要选B，看（subpopulation的结论，因为我们B中的高致死率知识因为本身就有很高的致死率里面有很多的重症</p>
+<ul>
+<li>treatment is a cause of the condition</li>
+</ul>
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="causal-inference/CI_basic_4.png" style="max-width: 45%;">
+  <img src="causal-inference/CI_basic_5.png" style="max-width: 45%;">
+</div>
+
+<ul>
+<li>解释：比如如果Treatment B，必须要等很久才能take，所以在等的时候condition会worsen——变成了重症！从而导致了更多的重症被接受了Treatment B. Treatment A不用等所以马上就轻症了！这就是为什么A的轻症占比更高</li>
+<li>选择：这种情况要选A（看total的结论），因为Treatment本身是造成worse condition的原因，从而导致了Y。所以我们需要考虑T对C的影响而不能直接看conditional的结论（因为T会让你去不同的C！）</li>
+</ul>
+<p>考虑这个影响的办法就是直接看T对Y的总体效果。</p>
+<p>结论：conclusion取决于causal structure</p>
+<h2 id="统计基础知识点"><a href="#统计基础知识点" class="headerlink" title="统计基础知识点"></a>统计基础知识点</h2><p>Independence: P(A∩B)&#x3D;P(A)⋅P(B)</p>
+<p>P(A|B) &#x3D; P(A) 即当A与B独立，则已知B发生A发生的概率就是A本身发生的概率，他们的发生不会互相影响</p>
+<p>condition independence: P(A|B,C)&#x3D;P(A|C)</p>
+
+            
+                
+            
+        </div>
+
+        
+
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/notes/">notes</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">声明: 本文内容由Jasper创作整理，读者若需转载，请保留出处，谢谢！</p>
+    
+    
+    
+</div>
+
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            本站已建立&nbsp;<a href="/about" id="siteBuildingTime"></a>&nbsp;天， <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span><br/>
+            ©2025-<span id="cpYear"></span> 基于&nbsp;<a href="http://hexo.io" target="_blank" rel="external nofollow noopener" title="Hexo">Hexo</a>
+            ，主题采用&nbsp;&nbsp;<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="external nofollow noopener" title="JSimple theme">JSimple</a>
+            ，作者&nbsp;<a href="https://github.com/jsp-0615" target="_blank" title="author">Jasper</a>
+            ，托管于&nbsp;<a href="https://pages.github.com" target="_blank" rel="external nofollow noopener" title="github">github</a>
+            ，<a href="https://jsp-0615.github.io/sitemap.xml" title="网站地图" rel="alternate" type="application/xml">网站地图</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="true"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script async src="/js/SimpleCore.min.js"></script>
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- disqus count -->
+
+    
+
+
+<!-- google analytics -->
+
+
+<!-- ms clarity -->
+
+</body>
+</html>

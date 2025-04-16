@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-Hans">
+<head>
+    <!--[if lte IE 9]>
+    <meta http-equiv="refresh" content="0;url=https://jsp-0615.github.io/warn.html">
+<![endif]-->
+
+<meta charset="utf-8" />
+<title>rnn | Jasper自学笔记</title>
+<meta name="keywords" content="" />
+<meta name="description" content="RNNRecurrent Neural Network是一种具有循环结构的神经网络，能够处理序列数据，与传统的前馈神经网络不同，RNN通过将当前时刻的输出与前一时刻的状态（或叫做隐藏层）作为输入传递到下一个时刻，使得它能保留之前的信息并用于当前的决策
+
+输入层：输入数据的每一时刻（如时间序列数据的每个时间步）都会传递到网络
+隐藏层：RNN的核心是循环结构，它将先前的隐藏状态与当前的输入结合，生成当" />
+<meta name="author" content="Jasper" />
+<meta name="applicable-device" content="pc,mobile" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Jasper自学笔记" />
+<meta name="renderer" content="webkit" />
+<meta name="force-rendering" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="rnn | Jasper自学笔记" />
+<meta property="og:description" content="RNNRecurrent Neural Network是一种具有循环结构的神经网络，能够处理序列数据，与传统的前馈神经网络不同，RNN通过将当前时刻的输出与前一时刻的状态（或叫做隐藏层）作为输入传递到下一个时刻，使得它能保留之前的信息并用于当前的决策
+
+输入层：输入数据的每一时刻（如时间序列数据的每个时间步）都会传递到网络
+隐藏层：RNN的核心是循环结构，它将先前的隐藏状态与当前的输入结合，生成当" />
+<meta property="og:url" content="https://jsp-0615.github.io" />
+<meta property="og:site_name" content="Jasper自学笔记" />
+
+<link rel="dns-prefetch" href="https://jsp-0615.github.io" />
+<link rel="preconnect" href="https://jsp-0615.github.io" />
+
+    <link rel="preconnect" href="https://.disqus.com" />
+    <link rel="preconnect" href="https://c.disquscdn.com" />
+
+
+<link rel="icon" type="image/svg+xml" href="https://jsp-0615.github.io/images/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="https://jsp-0615.github.io/images/favicon.png" />
+<link rel="alternate" type="application/xml" title="Site Map" href="https://jsp-0615.github.io/sitemap.xml"/>
+<link rel="canonical" href="https://jsp-0615.github.io/knowledgenotes/2025/04/16/RNN/" />
+
+
+<link rel="stylesheet" href="/css/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" media="print" onload="this.media='all'" crossorigin />
+<link rel="stylesheet" href="/css/JSimple.min.css" />
+
+<style id="highl_css"></style>
+
+<script type="text/javascript">
+    (function() {
+        let jsi_config = {
+            isPost: 'true',
+            creationTime: '12/04/2025',
+            highlightTheme: 'atom-one',
+            readMode: 'day',
+            chatLink: '',
+            localSearch: { dbPath: '' }
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        window.jsi_config = jsi_config;
+    })()
+</script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="JSM">JSM</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/about" title="About">
+            <i class="fa fa-question-circle"></i>
+            <span>About</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#" aria-label="content searching link"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#" aria-label="reading mode chang"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" src="/images/cover-day.webp" alt="cover-img" loading="lazy"/>
+    <div class="cover-info">
+        <img class="avatar" src="/images/avatar.webp" width="100" alt="avatar" loading="lazy"/>
+        <h1>Jasper知识库</h1>
+        <h3></h3>
+        <h4>全栈DS/DA工程师养成记</h4>
+        <div class="cover-sns">
+            
+    <div class="btn btn-github">
+        <a href="https://github.com/jsp-0615" title="github" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+    <div class="btn btn-youtube">
+        <a href="" title="youtube" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-youtube"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最新</a></li>
+        
+            
+                <li class="">
+                    <a href="/categories/knowledgeNotes" data-name="知识笔记">知识笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/outcomes" data-name="成果展示">成果展示</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/problemNotes" data-name="问题笔记">问题笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/grocery" data-name="杂货铺">杂货铺</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="按Shift启动搜索" />
+        <button type="button" aria-label="fa-search" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix" itemscope itemtype="https://schema.org/Person">
+                <a class="avatar fleft" target="_blank" href="https://github.com/jsp-0615" rel="author noopener">
+                    <img width="48" src="/images/avatar.webp" alt="avatar" itemprop="image"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a target="_blank" rel="noopener" href="https://github.com/jsp-0615" itemprop="url"><span itemprop="name">Jasper</span></a>
+                    <span itemprop="datePublished" content="2025-04-16T21:47:45.211+10:00">最后编辑于&nbsp;2025-04-16</span>
+                </p>
+                <p itemprop="description">一个学习记录网站</p>
+            </div>
+            <h1 class="post-title">
+                <a target="_self" href="https://jsp-0615.github.io/knowledgenotes/2025/04/16/RNN/" itemprop="mainEntityOfPage"><span itemprop="headline">RNN</span></a>
+            </h1>
+            <div class="post-meta" itemprop="wordCount">
+                本文共计4178个字 |
+                <span id="busuanzi_container_page_pv">
+                    你是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位到访读者
+                </span>
+            </div>
+        </div>
+        <div class="post-content markdown-body articleBody" itemprop="articleBody">
+            <h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><p>Recurrent Neural Network是一种具有循环结构的神经网络，能够处理序列数据，与传统的前馈神经网络不同，RNN通过将当前时刻的输出与前一时刻的状态（或叫做隐藏层）作为输入传递到下一个时刻，使得它能保留之前的信息并用于当前的决策</p>
+<p><img src="D:\blog\source_posts\RNN\1HgAY1lLMYSANqtgTgwWeXQ.png" alt="img"></p>
+<p><strong>输入层</strong>：输入数据的每一时刻（如时间序列数据的每个时间步）都会传递到网络</p>
+<p><strong>隐藏层</strong>：RNN的核心是循环结构，它将先前的隐藏状态与当前的输入结合，生成当前的隐藏状态。通常，RNN的隐藏层包含多个神经元，且它们的状态是由上一时刻的输出状态递归计算得来的。</p>
+<p><strong>输出层</strong>：基于隐藏层的输出，生成预测结果。</p>
+<p>假设我们有输入序列 $x_1,x_2,…,x_T$，RNN 每个时间步 t 会更新隐藏状态 $h_t$，基本公式如下：</p>
+<p>$$h_t&#x3D;\tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)$$</p>
+<p>$$\hat y_t&#x3D;W_{hy}h_t+b_y $$</p>
+<p>其中的参数有：</p>
+<ul>
+<li>$W_{xh}$：输入到隐藏层的权重（输入维度 → 隐藏维度）</li>
+<li>$W_{hh}$：隐藏状态之间的权重（隐藏维度 → 隐藏维度）</li>
+<li>$b_h$：隐藏层的偏置</li>
+<li>$W_{hy}$：隐藏到输出的权重（隐藏维度 → 输出维度）</li>
+<li>$b_y$：输出层偏置</li>
+</ul>
+<p>RNN的种类有以下这些：</p>
+<p>one-to-one：简单预测</p>
+<p>one-to-many：图像描述生成</p>
+<p>many-to-one：分类问题，比如说：情感分析，给定一段话，输出这段话的情况是positive还是negative</p>
+<p>第一个many-to-many：机器翻译，语言模型</p>
+<p>第二个many-to-many：命名实体识别（NER），词性标注（POS Tagging）</p>
+<p><img src="D:\blog\source_posts\RNN\various_rnn.png" alt="various_rnn"></p>
+<h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><p>RNN的反向传播(Backpropagation Through Time,BPTT)是它的核心部分，核心思路是展开时间维度做反向传播，由于RNN会在每个时间步共享参数，在做反向传播时要沿着时间轴展开整个网络</p>
+<p>设loss为总损失: $L&#x3D;\sum_{t&#x3D;1}^TL_t&#x3D;\sum_{t&#x3D;1}^TCrossEntropy(y_t,\hat y_t)$</p>
+<blockquote>
+<p>这里算损失的时候对于每个时间步都去算了交叉熵，那这里每个时间步的true label到底是什么</p>
+</blockquote>
+<ul>
+<li>情况一：每个时间步都要输出(多对多) 语言模型，机器翻译等任务，比如输入序列是x&#x3D;[“I”,”love”,”deep”,”learning”]那么目标输出（true label）：y&#x3D;[“love”,”deep”,”learning”,”!”] 那么对于每个时间步就有一个true label了</li>
+<li>情况二：只有最后一个时间步需要输出（多对一）比如情感分析，输入一段话，最终只有一个结果，假设输入是x&#x3D;[“This”,”movie”,”is”,”great”] 整个序列的输出只有一个y&#x3D;”positive”，那么只在最后一步做交叉熵</li>
+<li>情况三：同样是many-to-many，比如命名实体识别，词性标注，每个输入词都对应一个标签。输入句子： x&#x3D;[“Barack”,”Obama”,”was”,”born”]目标标签：y&#x3D;[“PER”,”PER”,”O”,”O”]每个时间步就有对应的真实标签。</li>
+</ul>
+<p><em>公式上进行了求和是因为我们假设的是 <strong>每个时间步都有输出、有标签</strong> 的任务，比如语言建模、机器翻译、时间序列预测等。如果是 <strong>只在最后一步才预测的任务</strong>，就不需要对每个时间步计算交叉熵，只计算最后一个时间步的损失就可以了。</em></p>
+<p>对输出层的参数求导:</p>
+<p>$\frac{\partial L}{\partial W_{hy}}&#x3D;\sum_{t&#x3D;1}^T\frac{\partial L_t }{\partial  \hat y_t}\cdot \frac{\partial \hat y_t}{\partial W_{hy}}$</p>
+<p>根据上面对损失的分类讨论，这里的输出层的参数求导的求和也会根据上面的不同而不同，如上面每个时间步都有输出的语言模型，机器翻译，时间序列预测，就会有多个loss，所以就要对每个时间步求导，然后加总起来，形成最终的$W_{hy}$的梯度</p>
+<p>对隐藏状态权重$W_{hh}$的梯度</p>
+<p>$\frac{\partial L}{\partial W_{hh}} &#x3D; \sum_{t&#x3D;1}^{T} \sum_{k&#x3D;1}^{t}<br>\left(<br>\frac{\partial L_t}{\partial h_t} \cdot<br>\frac{\partial h_t}{\partial h_k} \cdot<br>\frac{\partial h_k}{\partial W_{hh}}<br>\right)$</p>
+<p>看懂这个式子很重要！</p>
+<p>它的含义是：</p>
+<ul>
+<li>当前的损失$L_t$ 不仅受到当前的隐藏状态 $h_t$ 影响</li>
+<li>$h_t$ 又受到之前所有隐藏状态 $h_{t-1}, h_{t-2}, \dots$ 的影响</li>
+<li>所以梯度要“<strong>沿着时间向前传递</strong>”</li>
+</ul>
+<p>由于 $W_{hh}$ 是 <strong>在所有时间步中共享的参数</strong>，所以它的总梯度是所有时间步对它的影响的 <strong>累加</strong>$\frac{\partial L}{\partial W_{hh}} &#x3D; \sum_{t&#x3D;1}^{T}\frac{\partial L_t}{\partial W_{hh}} $&#x3D;&#x3D;注：这里的求和也是 根据RNN的不同类型而做区别，只有多对多任务需要累加和，为了更通用，下面一律以多对多任务的情况进行最复杂的情况进行解释&#x3D;&#x3D;</p>
+<p>关键在于$W_{hh}$ 这里的$L_t$​对他求导，为了看着方便我们将前向传播的式子抄下来：$$h_t&#x3D;\tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)$$</p>
+<p>$$\hat y_t&#x3D;W_{hy}h_t+b_y $$</p>
+<p>根据链式法则$L_t&#x3D;CrossEntropy(\hat y_t,y_t)$ 所以根据链式法则， $\frac{\partial L_t}{\partial h_t}$ 然后$h_t$又是和$W_{hh}$是有关系了但要注意这里还有个$h_{t-1}$$W_{hh}$会间接受到多个时间步的影响，这一影响就是从头影响到结尾，所以对$W_{hh}$有了内层的求和，</p>
+<p>同理对于$W_{xh}$的梯度更新：</p>
+<p>对于每一个时间步都有</p>
+<p>$\frac{\partial h_t}{\partial W_{xh}}&#x3D;(1−h_t^2)⋅x_t^⊤$&#x3D;&#x3D;注：这个求导结果是基于激活函数是tanh的情况下&#x3D;&#x3D;</p>
+<p>然后对于每个时间步产生的loss的对他的梯度$\frac{\partial L_t}{\partial W_{xh}} &#x3D; \frac{\partial L_t}{\partial h_t} \cdot \frac{\partial h_t}{\partial W_{xh}} &#x3D; \delta_t \cdot x_t^\top$</p>
+<p>其中$\delta_t &#x3D; \frac{\partial L_t}{\partial h_t} \odot (1 - h_t^2)$⊙ 表示按元素乘法（Hadamard product）。$\delta_t$来自输出层的梯度反传到$h_t$，</p>
+<p>总梯度（因为$W_{xh}$在每个时间步也是共享的</p>
+<p>$\frac{\partial L}{\partial W_{xh}} &#x3D; \sum_{t&#x3D;1}^{T} \delta_t \cdot x_t^\top$ &#x3D;&#x3D;每一项$\delta_t \cdot x_t^\top$都只和当前时间步$$x_t,h_t$$有关&#x3D;&#x3D;</p>
+<p>自此一次反向传播，再梯度下降更新参数，一次反向传播就全部完成了</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><h4 id="处理序列数据的天然优势"><a href="#处理序列数据的天然优势" class="headerlink" title="处理序列数据的天然优势"></a>处理序列数据的天然优势</h4><ul>
+<li>RNN 最大的优点是<strong>可以处理变长序列输入</strong>，不像传统的全连接神经网络（MLP）只能处理固定维度的向量。</li>
+<li>它能自动建模时间步之间的<strong>时序依赖关系（temporal dependency）</strong>，这是做 NLP 和时间序列任务的基础。</li>
+</ul>
+<h4 id="参数共享，模型紧凑"><a href="#参数共享，模型紧凑" class="headerlink" title="参数共享，模型紧凑"></a>参数共享，模型紧凑</h4><ul>
+<li>RNN 在每个时间步<strong>共享相同的网络参数（权重）</strong>，不像深层 MLP 那样每一层都有一套参数。</li>
+<li>这大大减少了模型的参数量，提升了<strong>泛化能力和训练效率</strong>。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><h4 id="梯度消失和梯度爆炸"><a href="#梯度消失和梯度爆炸" class="headerlink" title="梯度消失和梯度爆炸"></a>梯度消失和梯度爆炸</h4><p>在训练 RNN 时采用 <strong>反向传播通过时间（BPTT）</strong>，梯度要链式传播多个时间步。</p>
+<p>如果时间步较多，梯度会连续相乘：</p>
+<p>$\frac{\partial h_t}{\partial h_k} &#x3D; \prod_{i&#x3D;k+1}^{t} \frac{\partial h_i}{\partial h_{i-1}}$</p>
+<ul>
+<li>导数小于 1 → 梯度消失，模型学不到长期依赖；</li>
+<li>导数大于 1 → 梯度爆炸，导致模型不稳定或发散。</li>
+</ul>
+<p>这是 RNN 最大的训练困难之一。</p>
+<h4 id="难以捕捉长期依赖关系"><a href="#难以捕捉长期依赖关系" class="headerlink" title="难以捕捉长期依赖关系"></a>难以捕捉长期依赖关系</h4><ul>
+<li>虽然理论上可以记住长期历史信息，但实际上 RNN 更擅长捕捉<strong>短期依赖</strong>。这里的本质原因还是梯度消失，反向传播的时候是相乘的，每乘一次梯度都会变小，长时间步乘下来就接近0即梯度消失，第二个就是RNN的结构只有一个隐藏状态$h_t$来记忆之前的信息，这个隐藏状态每一步都会被新的输入和权重洗掉，旧信息会被“覆盖”</li>
+<li>长时间间隔的输入（如前文主语和后文动词）常常会被“遗忘”或削弱。</li>
+<li>所以原始 RNN 不能很好地解决如语言建模中的“长句子”问题。</li>
+</ul>
+<h4 id="不能并行计算，训练效率低"><a href="#不能并行计算，训练效率低" class="headerlink" title="不能并行计算，训练效率低"></a>不能并行计算，训练效率低</h4><ul>
+<li>RNN 是<strong>严格按时间步串行计算</strong>的：必须等 $h_{t-1}$ 算出来后，才能计算 $h_t$。</li>
+<li>这使得 <strong>GPU 加速效果不明显，训练时间长</strong>，尤其在长序列任务中更为明显。</li>
+<li>相比之下，Transformer 是完全并行的，效率更高。</li>
+</ul>
+
+            
+                
+            
+        </div>
+
+        
+
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/notes/">notes</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">声明: 本文内容由Jasper创作整理，读者若需转载，请保留出处，谢谢！</p>
+    
+    
+    
+</div>
+
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            本站已建立&nbsp;<a href="/about" id="siteBuildingTime"></a>&nbsp;天， <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span><br/>
+            ©2025-<span id="cpYear"></span> 基于&nbsp;<a href="http://hexo.io" target="_blank" rel="external nofollow noopener" title="Hexo">Hexo</a>
+            ，主题采用&nbsp;&nbsp;<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="external nofollow noopener" title="JSimple theme">JSimple</a>
+            ，作者&nbsp;<a href="https://github.com/jsp-0615" target="_blank" title="author">Jasper</a>
+            ，托管于&nbsp;<a href="https://pages.github.com" target="_blank" rel="external nofollow noopener" title="github">github</a>
+            ，<a href="https://jsp-0615.github.io/sitemap.xml" title="网站地图" rel="alternate" type="application/xml">网站地图</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="true"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script async src="/js/SimpleCore.min.js"></script>
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- disqus count -->
+
+    
+
+
+<!-- google analytics -->
+
+
+<!-- ms clarity -->
+
+</body>
+</html>

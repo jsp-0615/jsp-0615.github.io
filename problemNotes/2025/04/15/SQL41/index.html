@@ -6,10 +6,35 @@
 <![endif]-->
 
 <meta charset="utf-8" />
-<title>the first blog | Jasper自学笔记</title>
+<title>sql41 最长连续登录天数 | Jasper自学笔记</title>
 <meta name="keywords" content="" />
-<meta name="description" content="The first blog时间开始于2025&amp;#x2F;4&amp;#x2F;12，周六，晚上20:45，终于千难万险将所有前期准备弄完了！接下来我会定期将自己的学习笔记跟新在这里，一方面督促自己努力学习，同时将脑中知识整理成可以发布出去的版本！
-简介嗯。。。简单介绍一下自己，我是一名悉大的学生Jasper，正在学习Data Science，但目前的就业情况呢，导致我这种学历的人呢，上不上，下不下的，所" />
+<meta name="description" content="SQL41 最长连续登录天数描述你正在搭建一个用户活跃度的画像，其中一个与活跃度相关的特征是“最长连续登录天数”， 请用SQL实现“2023年1月1日-2023年1月31日用户最长的连续登录天数”
+登陆表 tb_dau：
+
+
+
+fdate
+user_id
+
+
+
+2023-01-01
+10000
+
+
+2023-01-02
+10000
+
+
+2023-01-04
+10000
+
+
+输出：
+
+
+
+user_" />
 <meta name="author" content="Jasper" />
 <meta name="applicable-device" content="pc,mobile" />
 <meta name="format-detection" content="telephone=no,email=no" />
@@ -19,9 +44,34 @@
 <meta name="force-rendering" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="the first blog | Jasper自学笔记" />
-<meta property="og:description" content="The first blog时间开始于2025&amp;#x2F;4&amp;#x2F;12，周六，晚上20:45，终于千难万险将所有前期准备弄完了！接下来我会定期将自己的学习笔记跟新在这里，一方面督促自己努力学习，同时将脑中知识整理成可以发布出去的版本！
-简介嗯。。。简单介绍一下自己，我是一名悉大的学生Jasper，正在学习Data Science，但目前的就业情况呢，导致我这种学历的人呢，上不上，下不下的，所" />
+<meta property="og:title" content="sql41 最长连续登录天数 | Jasper自学笔记" />
+<meta property="og:description" content="SQL41 最长连续登录天数描述你正在搭建一个用户活跃度的画像，其中一个与活跃度相关的特征是“最长连续登录天数”， 请用SQL实现“2023年1月1日-2023年1月31日用户最长的连续登录天数”
+登陆表 tb_dau：
+
+
+
+fdate
+user_id
+
+
+
+2023-01-01
+10000
+
+
+2023-01-02
+10000
+
+
+2023-01-04
+10000
+
+
+输出：
+
+
+
+user_" />
 <meta property="og:url" content="https://jsp-0615.github.io" />
 <meta property="og:site_name" content="Jasper自学笔记" />
 
@@ -35,7 +85,7 @@
 <link rel="icon" type="image/svg+xml" href="https://jsp-0615.github.io/images/favicon.svg" />
 <link rel="alternate icon" type="image/png" href="https://jsp-0615.github.io/images/favicon.png" />
 <link rel="alternate" type="application/xml" title="Site Map" href="https://jsp-0615.github.io/sitemap.xml"/>
-<link rel="canonical" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/12/my-first-blog/" />
+<link rel="canonical" href="https://jsp-0615.github.io/problemNotes/2025/04/15/SQL41/" />
 
 
 <link rel="stylesheet" href="/css/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" media="print" onload="this.media='all'" crossorigin />
@@ -160,26 +210,62 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a target="_blank" rel="noopener" href="https://github.com/jsp-0615" itemprop="url"><span itemprop="name">Jasper</span></a>
-                    <span itemprop="datePublished" content="2025-04-12T23:01:16.647+10:00">最后编辑于&nbsp;2025-04-12</span>
+                    <span itemprop="datePublished" content="2025-04-15T15:20:29.274+10:00">最后编辑于&nbsp;2025-04-15</span>
                 </p>
                 <p itemprop="description">一个学习记录网站</p>
             </div>
             <h1 class="post-title">
-                <a target="_self" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/12/my-first-blog/" itemprop="mainEntityOfPage"><span itemprop="headline">The First Blog</span></a>
+                <a target="_self" href="https://jsp-0615.github.io/problemNotes/2025/04/15/SQL41/" itemprop="mainEntityOfPage"><span itemprop="headline">SQL41 最长连续登录天数</span></a>
             </h1>
             <div class="post-meta" itemprop="wordCount">
-                本文共计480个字 |
+                本文共计717个字 |
                 <span id="busuanzi_container_page_pv">
                     你是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位到访读者
                 </span>
             </div>
         </div>
         <div class="post-content markdown-body articleBody" itemprop="articleBody">
-            <h1 id="The-first-blog"><a href="#The-first-blog" class="headerlink" title="The first blog"></a>The first blog</h1><p>时间开始于2025&#x2F;4&#x2F;12，周六，晚上20:45，终于千难万险将所有前期准备弄完了！接下来我会定期将自己的学习笔记跟新在这里，一方面督促自己努力学习，同时将脑中知识整理成可以发布出去的版本！</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>嗯。。。简单介绍一下自己，我是一名悉大的学生Jasper，正在学习Data Science，但目前的就业情况呢，导致我这种学历的人呢，上不上，下不下的，所以我想以博客的形式督促增加自己的技能点，点亮所有必要的知识点，目前呢自己的状态就是啥都会一点，但是啥都不是那么会，包括最基础的Python&#x2F;SQL&#x2F;R，Machine Learning，Deep Learning，作为一个计算机科班出生的，Java自然也不在话下，算法嘛会点，但绝对不多，大数据框架Hadoop好像是学完了，但好像又没有，Hive，Spark现在还在学习中</p>
-<p>最后用看到张一鸣说过的一句话来结尾</p>
-<p>做正确的事才是务实，短期投机不是务实。大力出奇迹事务实，刨根问底是务实，抓住本之是务实，尊重用户是务实，认识世界的多样性是务实。</p>
+            <h1 id="SQL41-最长连续登录天数"><a href="#SQL41-最长连续登录天数" class="headerlink" title="SQL41 最长连续登录天数"></a>SQL41 最长连续登录天数</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>你正在搭建一个用户活跃度的画像，其中一个与活跃度相关的特征是“最长连续登录天数”， 请用SQL实现“2023年1月1日-2023年1月31日用户最长的连续登录天数”</p>
+<p>登陆表 <strong>tb_dau：</strong></p>
+<table>
+<thead>
+<tr>
+<th>fdate</th>
+<th>user_id</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023-01-01</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>2023-01-02</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>2023-01-04</td>
+<td>10000</td>
+</tr>
+</tbody></table>
+<p>输出：</p>
+<table>
+<thead>
+<tr>
+<th>user_id</th>
+<th>max_consec_days</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10000</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> tb_dau;</span><br><span class="line"><span class="keyword">create table</span> `tb_dau` (</span><br><span class="line">    `fdate` <span class="type">date</span>,</span><br><span class="line">    `user_id` <span class="type">int</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert into</span> tb_dau(fdate, user_id)</span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">(<span class="string">&#x27;2023-01-01&#x27;</span>, <span class="number">10000</span>),</span><br><span class="line">(<span class="string">&#x27;2023-01-02&#x27;</span>, <span class="number">10000</span>),</span><br><span class="line">(<span class="string">&#x27;2023-01-04&#x27;</span>, <span class="number">10000</span>);</span><br><span class="line">user_id<span class="operator">|</span>max_consec_days</span><br><span class="line"><span class="number">10000</span><span class="operator">|</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>MySQL中日期加减的函数<br>日期增加 DATE_ADD，例：date_add(‘2023-01-01’, interval 1 day) 输出 ‘2023-01-02’<br>日期减少 DATE_SUB，例：date_sub(‘2023-01-01’, interval 1 day) 输出 ‘2022-12-31’<br>日期差 DATEDIFF，例：datediff(‘2023-02-01’, ‘2023-01-01’) 输出31</p>
+</blockquote>
+<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2>
             
                 
             
