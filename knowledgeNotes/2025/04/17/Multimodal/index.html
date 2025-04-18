@@ -220,11 +220,11 @@
 <h3 id="什么是多模态联合表示（Joint-Representation）？"><strong>什么是多模态联合表示（Joint Representation）？</strong></h3>
 <p>多模态联合表示是一种将多个模态（如文本、图像、声音等）的信息<strong>共同映射到一个统一的多模态向量空间</strong>中的表示方法。</p>
 <p>多模态联合表示通过神经网络、概率图模型将来自不同模态的数据进行融合，生成一个包含多个模态信息的统一表示。这个表示不仅保留了每个模态的关键信息，还能够在不同模态之间建立联系，从而支持跨模态的任务，如多模态情感分析、视听语音识别等</p>
-<p><img src="%5Cimages%5Cjointrepresentataion.png" alt="img" /></p>
+<p><img src="/images/jointrepresentataion.png" alt="img" /></p>
 <h3 id="什么是多模态协同表示（Coordinated-Representation）？"><strong>什么是多模态协同表示（Coordinated Representation）？</strong></h3>
 <p>多模态协同表示是一种<strong>将多个模态的信息分别映射到各自的表示空间</strong>，但映射后的向量或表示之间需要<strong>满足一定的相关性或约束条件</strong>的方法。这种方法的核心在于确保不同模态之间的信息在协同空间内能够相互协作，共同优化模型的性能。</p>
-<p><img src="%5Cimages%5Ccoordinatedrepresentation.png" alt="img" /></p>
-<p><img src="%5Cimages%5CmodalrepresentationComparsion.png" alt="image-20241004092412638" /></p>
+<p><img src="/images/coordinatedrepresentation.png" alt="img" /></p>
+<p><img src="/images/modalrepresentationComparsion.png" alt="image-20241004092412638" /></p>
 <h3 id="联合表示vs协同表示"><strong>联合表示vs协同表示</strong></h3>
 <blockquote>
 <p>一个映射到统一的空间中，一个分别映射到各自空间，然后再建立联系/关联</p>
@@ -251,7 +251,7 @@
 </tr>
 </tbody>
 </table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">图像 ---&gt; CNN ---&gt; <span class="number">256</span>维表示 --\</span><br><span class="line">                             &gt; concat --&gt; MLP --&gt; 输出</span><br><span class="line">文本 ---&gt; BERT --&gt; <span class="number">256</span>维表示 --/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">图像 ---&gt; CNN ---&gt; <span class="number">256</span>维表示 --/</span><br><span class="line">                             &gt; concat --&gt; MLP --&gt; 输出</span><br><span class="line">文本 ---&gt; BERT --&gt; <span class="number">256</span>维表示 --/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>协同表示（Coordinated Representation）</strong>。它是多模态学习中另一个核心思路，和联合表示相比，结构更<strong>松耦合</strong>，但目的更明确——<strong>保持不同模态之间语义上的一致性，同时保留各自独立表示空间</strong>。</p>
 <table>
 <thead>
@@ -313,7 +313,7 @@
 <h2 id="多模态融合">多模态融合</h2>
 <p><strong>什么是多模态融合（MultiModal Fusion）？</strong></p>
 <p>多模态融合指的是抽取自不同模态的信息整合成一个稳定的多模态表征，能够充分利用不同模态之间的互补性。从数据处理的层次角度将多模态融合分为<strong>数据级融合、特征级融合和目标级融合。</strong></p>
-<p><img src="%5Cimages%5Cmultimodalfusion.png" alt="image-20241004093207042" /></p>
+<p><img src="/images/multimodalfusion.png" alt="image-20241004093207042" /></p>
 <ul>
 <li>
 <p>数据级融合（Data-Level Fusion）：</p>
@@ -337,10 +337,10 @@
 </ul>
 </li>
 </ul>
-<p><img src="%5Cimages%5Cdifferenttypeofmultimodal" alt="img" /></p>
+<p><img src="/images/differenttypeofmultimodal" alt="img" /></p>
 <h2 id="协同学习Co-learning">协同学习Co-learning</h2>
 <p>在模态的表示和他们的预测模型之间转移知识，协同学习探索了从一种模态中学习的知识如何帮助在不同模态上训练的的计算模型，当其中一种模式资源有限（例如，带注释的数据）这一挑战尤其重要，辅助模态通常只参与模型得训练，不参与模型的使用</p>
-<p><img src="%5Cimages%5Ccolearning.png" alt="img" /></p>
+<p><img src="/images/colearning.png" alt="img" /></p>
 <h3 id="并行">并行</h3>
 <p>需要训练数据集，其中来自一种模态的观察结果与来自其他模态的观察结果直接相关，例如在一个视听语音数据集中，视频和语音样本来自同一个说话者。</p>
 <h3 id="非并行">非并行</h3>
