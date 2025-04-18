@@ -1,0 +1,425 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-Hans">
+<head>
+    <!--[if lte IE 9]>
+    <meta http-equiv="refresh" content="0;url=https://jsp-0615.github.io/warn.html">
+<![endif]-->
+
+<meta charset="utf-8" />
+<title>多模态 | Jasper自学笔记</title>
+<meta name="keywords" content="" />
+<meta name="description" content="定义
+“模态”是指信息的表达方式，例如：
+
+文本（Text）
+图像（Image）
+语音/音频（Audio）
+视频（Video）
+传感器数据（Sensor Data）
+
+多模态系统就是指能同时处理并整合这些不同类型数据的系统，因为本次任务聚焦于文本和图像的多标签文本分类，所以下文将专注于从这两的实践来叙述
+多模态学习涉及到多种关键技术，包括模态的表示、对齐、融合、转换以及协同学习等，这些技术有助于建" />
+<meta name="author" content="Jasper" />
+<meta name="applicable-device" content="pc,mobile" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Jasper自学笔记" />
+<meta name="renderer" content="webkit" />
+<meta name="force-rendering" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="多模态 | Jasper自学笔记" />
+<meta property="og:description" content="定义
+“模态”是指信息的表达方式，例如：
+
+文本（Text）
+图像（Image）
+语音/音频（Audio）
+视频（Video）
+传感器数据（Sensor Data）
+
+多模态系统就是指能同时处理并整合这些不同类型数据的系统，因为本次任务聚焦于文本和图像的多标签文本分类，所以下文将专注于从这两的实践来叙述
+多模态学习涉及到多种关键技术，包括模态的表示、对齐、融合、转换以及协同学习等，这些技术有助于建" />
+<meta property="og:url" content="https://jsp-0615.github.io" />
+<meta property="og:site_name" content="Jasper自学笔记" />
+
+<link rel="dns-prefetch" href="https://jsp-0615.github.io" />
+<link rel="preconnect" href="https://jsp-0615.github.io" />
+
+    <link rel="preconnect" href="https://.disqus.com" />
+    <link rel="preconnect" href="https://c.disquscdn.com" />
+
+
+<link rel="icon" type="image/svg+xml" href="https://jsp-0615.github.io/images/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="https://jsp-0615.github.io/images/favicon.png" />
+<link rel="alternate" type="application/xml" title="Site Map" href="https://jsp-0615.github.io/sitemap.xml"/>
+<link rel="canonical" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/17/Multimodal/" />
+
+
+<link rel="stylesheet" href="/css/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" media="print" onload="this.media='all'" crossorigin />
+<link rel="stylesheet" href="/css/JSimple.min.css" />
+
+<style id="highl_css"></style>
+<!-- MathJax 支持 -->
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+<script type="text/javascript">
+    (function() {
+        let jsi_config = {
+            isPost: 'true',
+            creationTime: '12/04/2025',
+            highlightTheme: 'atom-one',
+            readMode: 'day',
+            chatLink: '',
+            localSearch: { dbPath: '' }
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        window.jsi_config = jsi_config;
+    })()
+</script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="JSM">JSM</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/about" title="About">
+            <i class="fa fa-question-circle"></i>
+            <span>About</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#" aria-label="content searching link"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#" aria-label="reading mode chang"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" src="/images/cover-day.webp" alt="cover-img" loading="lazy"/>
+    <div class="cover-info">
+        <img class="avatar" src="/images/avatar.webp" width="100" alt="avatar" loading="lazy"/>
+        <h1>Jasper知识库</h1>
+        <h3></h3>
+        <h4>全栈DS/DA工程师养成记</h4>
+        <div class="cover-sns">
+            
+    <div class="btn btn-github">
+        <a href="https://github.com/jsp-0615" title="github" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+    <div class="btn btn-youtube">
+        <a href="" title="youtube" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-youtube"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最新</a></li>
+        
+            
+                <li class="">
+                    <a href="/categories/knowledgeNotes" data-name="知识笔记">知识笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/outcomes" data-name="成果展示">成果展示</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/problemNotes" data-name="问题笔记">问题笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/grocery" data-name="杂货铺">杂货铺</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="按Shift启动搜索" />
+        <button type="button" aria-label="fa-search" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix" itemscope itemtype="https://schema.org/Person">
+                <a class="avatar fleft" target="_blank" href="https://github.com/jsp-0615" rel="author noopener">
+                    <img width="48" src="/images/avatar.webp" alt="avatar" itemprop="image"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a target="_blank" rel="noopener" href="https://github.com/jsp-0615" itemprop="url"><span itemprop="name">Jasper</span></a>
+                    <span itemprop="datePublished" content="2025-04-17T11:41:54.926+10:00">最后编辑于&nbsp;2025-04-17</span>
+                </p>
+                <p itemprop="description">一个学习记录网站</p>
+            </div>
+            <h1 class="post-title">
+                <a target="_self" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/17/Multimodal/" itemprop="mainEntityOfPage"><span itemprop="headline">多模态</span></a>
+            </h1>
+            <div class="post-meta" itemprop="wordCount">
+                本文共计6000个字 |
+                <span id="busuanzi_container_page_pv">
+                    你是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位到访读者
+                </span>
+            </div>
+        </div>
+        <div class="post-content markdown-body articleBody" itemprop="articleBody">
+            <h2 id="定义">定义</h2>
+<p>“模态”是指信息的表达方式，例如：</p>
+<ul>
+<li><strong>文本</strong>（Text）</li>
+<li><strong>图像</strong>（Image）</li>
+<li><strong>语音/音频</strong>（Audio）</li>
+<li><strong>视频</strong>（Video）</li>
+<li><strong>传感器数据</strong>（Sensor Data）</li>
+</ul>
+<p><strong>多模态系统</strong>就是指能同时处理并整合这些不同类型数据的系统，因为本次任务聚焦于文本和图像的多标签文本分类，所以下文将专注于从这两的实践来叙述</p>
+<p>多模态学习涉及到多种关键技术，包括模态的<strong>表示、对齐、融合、转换</strong>以及协同学习等，这些技术有助于建立不同模态之间的对应关系，学习多模态的共享表征空间，以及利用各模态间的互补来增强语义互补</p>
+<h2 id="对齐vs融合"><strong>对齐vs融合</strong></h2>
+<p>对齐关注的是如何在不同模态之间建立对应关系，而融合则是关于如何将这些多模态信息有效地结合起来，以提高模型的性能</p>
+<p>模态表示：模态表示是将不同感官或交互方式的数据转换为计算机可理解和处理的形式，以便后续的计算、分析和融合</p>
+<p><strong>文本模态的表示方法</strong>：文本模态的表示方法有多种，如one-hot，低维空间表示（如通过神经网络模型学习得到的转换矩阵将单词或子映射到语义空间中）、词袋表示及其衍生出的n-grams词袋表示等。目前主流的文本表示方法是预训练文本模型如BERT,Word2Vec等</p>
+<p><strong>视觉模态的表示</strong>：视觉模态分为图像模态和视频模态。图像模态的表示主要通过卷积神经网络（CNN）实现，如LeNet-5、AlexNet、VGG、GoogLeNet、ResNet等。视频模态的表示则结合了图像的空间属性和时间属性，通常由CNN和循环神经网络（RNN）或长短时记忆网络（LSTM）等模型共同处理。</p>
+<p>**表征学习（Representation Learning）≈向量化（Embedding）**旨在从原始数据中自动提取有效特征，<em><strong>形成计算机可理解的模态表示</strong></em>，以保留关键信息并促进跨模态交互与融合。</p>
+<h3 id="什么是多模态联合表示（Joint-Representation）？"><strong>什么是多模态联合表示（Joint Representation）？</strong></h3>
+<p>多模态联合表示是一种将多个模态（如文本、图像、声音等）的信息<strong>共同映射到一个统一的多模态向量空间</strong>中的表示方法。</p>
+<p>多模态联合表示通过神经网络、概率图模型将来自不同模态的数据进行融合，生成一个包含多个模态信息的统一表示。这个表示不仅保留了每个模态的关键信息，还能够在不同模态之间建立联系，从而支持跨模态的任务，如多模态情感分析、视听语音识别等</p>
+<p><img src="%5Cimages%5Cjointrepresentataion.png" alt="img" /></p>
+<h3 id="什么是多模态协同表示（Coordinated-Representation）？"><strong>什么是多模态协同表示（Coordinated Representation）？</strong></h3>
+<p>多模态协同表示是一种<strong>将多个模态的信息分别映射到各自的表示空间</strong>，但映射后的向量或表示之间需要<strong>满足一定的相关性或约束条件</strong>的方法。这种方法的核心在于确保不同模态之间的信息在协同空间内能够相互协作，共同优化模型的性能。</p>
+<p><img src="%5Cimages%5Ccoordinatedrepresentation.png" alt="img" /></p>
+<p><img src="%5Cimages%5CmodalrepresentationComparsion.png" alt="image-20241004092412638" /></p>
+<h3 id="联合表示vs协同表示"><strong>联合表示vs协同表示</strong></h3>
+<blockquote>
+<p>一个映射到统一的空间中，一个分别映射到各自空间，然后再建立联系/关联</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表示融合</td>
+<td>将模态A（如图像）和模态B（如文本）提取出的特征<strong>拼接/加权</strong>后送入同一个网络模块中</td>
+</tr>
+<tr>
+<td>端到端训练</td>
+<td>整个模型（图像编码器、文本编码器、融合层、分类头）可以<strong>一起训练</strong></td>
+</tr>
+<tr>
+<td>表示维度匹配</td>
+<td>通常需要将每个模态输出投影到<strong>相同维度</strong>再融合</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">图像 ---&gt; CNN ---&gt; <span class="number">256</span>维表示 --\</span><br><span class="line">                             &gt; concat --&gt; MLP --&gt; 输出</span><br><span class="line">文本 ---&gt; BERT --&gt; <span class="number">256</span>维表示 --/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>协同表示（Coordinated Representation）</strong>。它是多模态学习中另一个核心思路，和联合表示相比，结构更<strong>松耦合</strong>，但目的更明确——<strong>保持不同模态之间语义上的一致性，同时保留各自独立表示空间</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>保持独立</strong></td>
+<td>图像、文本、音频等模态分别编码，不做 early fusion</td>
+</tr>
+<tr>
+<td><strong>语义对齐</strong></td>
+<td>用“距离函数”或“对比损失”来让不同模态表示趋于一致</td>
+</tr>
+<tr>
+<td><strong>可扩展性强</strong></td>
+<td>更适合跨模态检索、生成等任务</td>
+</tr>
+<tr>
+<td><strong>常结合对比学习（Contrastive Learning）</strong></td>
+<td>如 CLIP、ALIGN 等模型中广泛使用</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="comment">#协同表示的示例代码</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CoordinatedModel</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, img_encoder, txt_encoder</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.img_encoder = img_encoder</span><br><span class="line">        <span class="variable language_">self</span>.txt_encoder = txt_encoder</span><br><span class="line">        <span class="variable language_">self</span>.temp = nn.Parameter(torch.tensor(<span class="number">1.0</span>))  <span class="comment"># 可学习的温度参数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, images, texts</span>):</span><br><span class="line">        img_feat = F.normalize(<span class="variable language_">self</span>.img_encoder(images), dim=-<span class="number">1</span>)</span><br><span class="line">        txt_feat = F.normalize(<span class="variable language_">self</span>.txt_encoder(texts), dim=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        logits = img_feat @ txt_feat.T / <span class="variable language_">self</span>.temp</span><br><span class="line">        labels = torch.arange(images.size(<span class="number">0</span>)).to(images.device)</span><br><span class="line"></span><br><span class="line">        loss_i2t = F.cross_entropy(logits, labels)  <span class="comment"># 图→文</span></span><br><span class="line">        loss_t2i = F.cross_entropy(logits.T, labels)  <span class="comment"># 文→图</span></span><br><span class="line">        loss = (loss_i2t + loss_t2i) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line"><span class="comment">#联合表示的示例代码</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> BertModel</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet18</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> BertModel</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MultiModalModel</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ✅ 图像编码器（使用预训练的 ResNet18）</span></span><br><span class="line">        <span class="variable language_">self</span>.image_encoder = resnet18(pretrained=<span class="literal">True</span>)</span><br><span class="line">        <span class="variable language_">self</span>.image_encoder.fc = nn.Linear(<span class="number">512</span>, <span class="number">256</span>)  <span class="comment"># ✅ 将原始输出映射到256维向量（统一维度）</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ✅ 文本编码器（使用预训练的 BERT）</span></span><br><span class="line">        <span class="variable language_">self</span>.text_encoder = BertModel.from_pretrained(<span class="string">&#x27;bert-base-uncased&#x27;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.text_proj = nn.Linear(<span class="number">768</span>, <span class="number">256</span>)  <span class="comment"># ✅ BERT 的输出是768维，我们也把它映射到256维</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ✅ 融合+分类器（典型的联合表示结构）</span></span><br><span class="line">        <span class="variable language_">self</span>.classifier = nn.Sequential(</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(<span class="number">256</span> * <span class="number">2</span>, <span class="number">128</span>),  <span class="comment"># ✅ 图像和文本各256维，拼接后是512维</span></span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(<span class="number">128</span>, <span class="number">1</span>)  <span class="comment"># ✅ 输出一个数，用于二分类（可用 sigmoid）</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, image, text_input</span>):</span><br><span class="line">        <span class="comment"># 图像编码：从 ResNet 得到图像的表征</span></span><br><span class="line">        img_feat = <span class="variable language_">self</span>.image_encoder(image)  <span class="comment"># (batch_size, 256)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 文本编码：从 BERT 得到文本的语义表示（pooler_output 是[CLS] token的输出）</span></span><br><span class="line">        text_feat = <span class="variable language_">self</span>.text_encoder(**text_input).pooler_output  <span class="comment"># (batch_size, 768)</span></span><br><span class="line">        text_feat = <span class="variable language_">self</span>.text_proj(text_feat)  <span class="comment"># ✅ 投影到256维</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ✅ 联合表示融合方式：直接拼接两个模态向量</span></span><br><span class="line">        fused = torch.cat([img_feat, text_feat], dim=<span class="number">1</span>)  <span class="comment"># (batch_size, 512)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 分类输出</span></span><br><span class="line">        output = <span class="variable language_">self</span>.classifier(fused)  <span class="comment"># (batch_size, 1)</span></span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="多模态对齐">多模态对齐</h3>
+<p>对齐是指在不同模态的数据之间<strong>发现和建立对应关系</strong>的过程</p>
+<p><strong>显示对齐（Explicit Alignment）</strong></p>
+<p>直接建立不同模态之间得对应关系，包括无监督对齐和监督对齐，显示对齐得一个重要工作是相似性度量，大多数方法都依赖于度量不同模态之间的相似性作为基本构建块。</p>
+<p><em><strong>无监督对齐</strong></em>：利用数据本身得统计特性或结构信息，无需额外标签，<strong>自动发现不同模态间得对应关系</strong></p>
+<ul>
+<li>CCA（典型相关分析）：通过最大化两组变量之间的相关性来发现它们之间的线性关系，常用于图像和文本的无监督对齐。</li>
+<li>自编码器：通过编码-解码结构学习数据的低维表示，有时结合循环一致性损失（Cycle Consistency Loss）来实现无监督的图像-文本对齐。</li>
+</ul>
+<p><em><strong>监督对齐</strong></em>：利用额外得标签或监督信息指导对齐过程，确保对齐得准确性</p>
+<ul>
+<li>多模态嵌入模型：如DeViSE(Deep Visual-Semantic Embeddings)通过最大化图像和对应文本标签在嵌入空间中得相似度来实现监督对齐</li>
+<li>多任务学习模型：同时学习图像分类和文本生成任务，利用共享层或联合损失函数来促进图像和文本之间得监督对齐</li>
+</ul>
+<p><strong>隐式对齐（Implicit Alignment）</strong></p>
+<p>隐式对齐<strong>用作另一个任务的中间(通常是潜在的)步骤。</strong> 这允许在许多任务中有更好的表现，包括语音识别、机器翻译、媒体描述和视觉问题回答。这些模型不显式地对齐数据，也不依赖于监督对齐示例，而是学习如何在模型训练期间潜在地对齐数据。不是直接建立对应关系，而是通过模型内部机制隐式地实现跨模态的对齐，这其中就包括<strong>注意力对齐和语义对齐</strong></p>
+<ol>
+<li>注意力对齐
+<ol>
+<li>Transformer模型：在跨模态任务中（如图像描述生成），利用自注意力机制和编码器-解码器结构，自动学习图像和文本之间的注意力分布，实现隐式对齐</li>
+<li>BERT-Based模型：在问答系统或文本-图像检索中，结合BERT的预训练表示和注意力机制，隐式地对齐文本查询和图像内容</li>
+</ol>
+</li>
+<li>语义对齐
+<ol>
+<li>图神经网络（GNN）：在构建图像和文本之间的语义时，利用GNN学习节点（模态数据）之间的语义关系，实现隐式的语义对齐</li>
+<li>预训练语言模型与视觉模型结合：如CLIP(Contrastive Lanugage-Image Pre-training)，通过对比学习在大量图像-文本对上训练，使模型学习到图像和文本在语义层面的对应关系，实现高效的隐式语义对齐</li>
+</ol>
+</li>
+</ol>
+<h2 id="多模态融合">多模态融合</h2>
+<p><strong>什么是多模态融合（MultiModal Fusion）？</strong></p>
+<p>多模态融合指的是抽取自不同模态的信息整合成一个稳定的多模态表征，能够充分利用不同模态之间的互补性。从数据处理的层次角度将多模态融合分为<strong>数据级融合、特征级融合和目标级融合。</strong></p>
+<p><img src="%5Cimages%5Cmultimodalfusion.png" alt="image-20241004093207042" /></p>
+<ul>
+<li>
+<p>数据级融合（Data-Level Fusion）：</p>
+<ul>
+<li>数据级融合，也称为像素级融合或原始数据融合，是在最底层的数据级别上进行融合。<strong>这种融合方式通常发生在数据预处理阶段，即将来自不同模态的原始数据直接合并或叠加在一起，形成一个新的数据集。</strong></li>
+<li>应用场景：适用于那些原始数据之间具有高度相关性和互补性的情况，如图像和深度图的融合。</li>
+</ul>
+</li>
+<li>
+<p>特征级融合（Feature-Level Fusion）：</p>
+<ul>
+<li>特征级融合是在特征提取之后、决策之前进行的融合。<strong>不同模态的数据首先被分别处理，提取出各自的特征表示，然后将这些特征表示在某一特征层上进行融合。</strong>==注：特征层是指网络中输出语义特征的那一层，代表模态的抽象表示==</li>
+<li>应用场景：广泛应用于图像分类、语音识别、情感分析等多模态任务中。</li>
+</ul>
+</li>
+<li>
+<p>目标级融合（Decision-Level Fusion）：</p>
+<ul>
+<li>目标级融合，也称为决策级融合或后期融合，是在各个单模态模型分别做出决策之后进行的融合。每个模态的模型首先独立地处理数据并给出自己的预测结果（如分类标签、回归值等），然后将这些预测结果进行整合以得到最终的决策结果。</li>
+<li>应用场景：适用于那些需要综合考虑多个独立模型预测结果的场景，如多传感器数据融合、多专家意见综合等。</li>
+</ul>
+</li>
+</ul>
+<p><img src="%5Cimages%5Cdifferenttypeofmultimodal" alt="img" /></p>
+<h2 id="协同学习Co-learning">协同学习Co-learning</h2>
+<p>在模态的表示和他们的预测模型之间转移知识，协同学习探索了从一种模态中学习的知识如何帮助在不同模态上训练的的计算模型，当其中一种模式资源有限（例如，带注释的数据）这一挑战尤其重要，辅助模态通常只参与模型得训练，不参与模型的使用</p>
+<p><img src="%5Cimages%5Ccolearning.png" alt="img" /></p>
+<h3 id="并行">并行</h3>
+<p>需要训练数据集，其中来自一种模态的观察结果与来自其他模态的观察结果直接相关，例如在一个视听语音数据集中，视频和语音样本来自同一个说话者。</p>
+<h3 id="非并行">非并行</h3>
+<p>不需要来自不同模式的观察结果之间的直接联系，通常通过使用类别重叠来实现共同学习，例如，在零样本学习中，使用来自Wikipedia的纯文本数据集扩展传统的视觉对象识别数据集以改进视觉对象识别的泛化能力。</p>
+<h3 id="混合">混合</h3>
+<p>通过共享模式或数据集桥接</p>
+<p>参考资料：</p>
+
+            
+                
+            
+        </div>
+
+        
+
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/notes/">notes</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">声明: 本文内容由Jasper创作整理，读者若需转载，请保留出处，谢谢！</p>
+    
+    
+    
+</div>
+
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            本站已建立&nbsp;<a href="/about" id="siteBuildingTime"></a>&nbsp;天， <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span><br/>
+            ©2025-<span id="cpYear"></span> 基于&nbsp;<a href="http://hexo.io" target="_blank" rel="external nofollow noopener" title="Hexo">Hexo</a>
+            ，主题采用&nbsp;&nbsp;<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="external nofollow noopener" title="JSimple theme">JSimple</a>
+            ，作者&nbsp;<a href="https://github.com/jsp-0615" target="_blank" title="author">Jasper</a>
+            ，托管于&nbsp;<a href="https://pages.github.com" target="_blank" rel="external nofollow noopener" title="github">github</a>
+            ，<a href="https://jsp-0615.github.io/sitemap.xml" title="网站地图" rel="alternate" type="application/xml">网站地图</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="true"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script async src="/js/SimpleCore.min.js"></script>
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- disqus count -->
+
+    
+
+
+<!-- google analytics -->
+
+
+<!-- ms clarity -->
+
+</body>
+</html>
