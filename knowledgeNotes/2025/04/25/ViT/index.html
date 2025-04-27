@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-Hans">
+<head>
+    <!--[if lte IE 9]>
+    <meta http-equiv="refresh" content="0;url=https://jsp-0615.github.io/warn.html">
+<![endif]-->
+
+<meta charset="utf-8" />
+<title>vision transformer | Jasper自学笔记</title>
+<meta name="keywords" content="" />
+<meta name="description" content="**ViT（Vision Transformer）**是将传统上处理自然语言的 Transformer 架构，直接应用到图像分类, 把图像切成很多小patch（小块），把每个patch当成一个“单词”（token），送入Transformer进行特征提取，最后用一个MLP分类器输出类别
+整体分4个步骤：
+(1) Image → Patch Embedding
+(2) Add Position En" />
+<meta name="author" content="Jasper" />
+<meta name="applicable-device" content="pc,mobile" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Jasper自学笔记" />
+<meta name="renderer" content="webkit" />
+<meta name="force-rendering" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="vision transformer | Jasper自学笔记" />
+<meta property="og:description" content="**ViT（Vision Transformer）**是将传统上处理自然语言的 Transformer 架构，直接应用到图像分类, 把图像切成很多小patch（小块），把每个patch当成一个“单词”（token），送入Transformer进行特征提取，最后用一个MLP分类器输出类别
+整体分4个步骤：
+(1) Image → Patch Embedding
+(2) Add Position En" />
+<meta property="og:url" content="https://jsp-0615.github.io" />
+<meta property="og:site_name" content="Jasper自学笔记" />
+
+<link rel="dns-prefetch" href="https://jsp-0615.github.io" />
+<link rel="preconnect" href="https://jsp-0615.github.io" />
+
+    <link rel="preconnect" href="https://.disqus.com" />
+    <link rel="preconnect" href="https://c.disquscdn.com" />
+
+
+<link rel="icon" type="image/svg+xml" href="https://jsp-0615.github.io/images/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="https://jsp-0615.github.io/images/favicon.png" />
+<link rel="alternate" type="application/xml" title="Site Map" href="https://jsp-0615.github.io/sitemap.xml"/>
+<link rel="canonical" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/25/ViT/" />
+
+
+<link rel="stylesheet" href="/css/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" media="print" onload="this.media='all'" crossorigin />
+<link rel="stylesheet" href="/css/JSimple.min.css" />
+
+<style id="highl_css"></style>
+<!-- MathJax 支持 -->
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+<script type="text/javascript">
+    (function() {
+        let jsi_config = {
+            isPost: 'true',
+            creationTime: '12/04/2025',
+            highlightTheme: 'atom-one',
+            readMode: 'day',
+            chatLink: '',
+            localSearch: { dbPath: '' }
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        window.jsi_config = jsi_config;
+    })()
+</script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="JSM">JSM</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/about" title="About">
+            <i class="fa fa-question-circle"></i>
+            <span>About</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#" aria-label="content searching link"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#" aria-label="reading mode chang"><i class="fa fa-sun-o"></i></a>
+    
+</div>
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <img class="cover-img" src="/images/cover-day.webp" alt="cover-img" loading="lazy"/>
+    <div class="cover-info">
+        <img class="avatar" src="/images/avatar.webp" width="100" alt="avatar" loading="lazy"/>
+        <h1>Jasper知识库</h1>
+        <h3></h3>
+        <h4>全栈DS/DA工程师养成记</h4>
+        <div class="cover-sns">
+            
+    <div class="btn btn-github">
+        <a href="https://github.com/jsp-0615" title="github" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+    <div class="btn btn-youtube">
+        <a href="" title="youtube" rel="external nofollow noopener" target="_blank">
+            <i class="fa fa-youtube"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最新</a></li>
+        
+            
+                <li class="">
+                    <a href="/categories/knowledgeNotes" data-name="知识笔记">知识笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/outcomes" data-name="成果展示">成果展示</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/problemNotes" data-name="问题笔记">问题笔记</a>
+                </li>
+            
+                <li class="">
+                    <a href="/categories/grocery" data-name="杂货铺">杂货铺</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text"
+               readonly="readonly"
+               id="local-search-input-tip"
+               placeholder="按Shift启动搜索" />
+        <button type="button" aria-label="fa-search" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix" itemscope itemtype="https://schema.org/Person">
+                <a class="avatar fleft" target="_blank" href="https://github.com/jsp-0615" rel="author noopener">
+                    <img width="48" src="/images/avatar.webp" alt="avatar" itemprop="image"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a target="_blank" rel="noopener" href="https://github.com/jsp-0615" itemprop="url"><span itemprop="name">Jasper</span></a>
+                    <span itemprop="datePublished" content="2025-04-25T20:06:20.939+10:00">最后编辑于&nbsp;2025-04-25</span>
+                </p>
+                <p itemprop="description">一个学习记录网站</p>
+            </div>
+            <h1 class="post-title">
+                <a target="_self" href="https://jsp-0615.github.io/knowledgeNotes/2025/04/25/ViT/" itemprop="mainEntityOfPage"><span itemprop="headline">Vision Transformer</span></a>
+            </h1>
+            <div class="post-meta" itemprop="wordCount">
+                本文共计9721个字 |
+                <span id="busuanzi_container_page_pv">
+                    你是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位到访读者
+                </span>
+            </div>
+        </div>
+        <div class="post-content markdown-body articleBody" itemprop="articleBody">
+            <p>**ViT（Vision Transformer）**是将传统上处理自然语言的 Transformer 架构，<strong>直接应用到图像分类</strong>, 把图像切成很多小patch（小块），把每个patch当成一个“单词”（token），送入Transformer进行特征提取，最后用一个MLP分类器输出类别</p>
+<p>整体分4个步骤：</p>
+<p>(1) Image → Patch Embedding<br />
+(2) Add Position Encoding<br />
+(3) Transformer Encoder (self-attention)<br />
+(4) MLP Classifier</p>
+<p><img src="/images/ViT.jpg" alt="img" /></p>
+<h2 id="ViT基本架构">ViT基本架构</h2>
+<h3 id="1-Patch-Embedding">1. Patch Embedding</h3>
+<p>Transformer原本是用来做NLP的工作的，所以ViT的首要任务是将图转换成词的结构，这里采取的方法是如上图左下角所示，将图片分割成小块，每个小块就相当于句子里的一个词。这里把每个小块称作Patch，而<strong>Patch Embedding</strong>就是把每个Patch再经过一个全连接网络压缩成一定维度的向量。把图片切成小块，假设原始输入图片为(3,224,224)，将其分割成很多小块（patch），比如16x16，每个小块拉平成一个向量（flatten），然后过一个线性层形成<strong>Patch Embedding</strong></p>
+<p>这里是ViT源代码中关于Patch Embedding的部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 默认img_size=224, patch_size=16，in_chans=3，embed_dim=768，</span><br><span class="line">self.patch_embed = embed_layer(</span><br><span class="line">    img_size=img_size, patch_size=patch_size, </span><br><span class="line">    in_chans=in_chans, embed_dim=embed_dim)</span><br></pre></td></tr></table></figure>
+<p>而embed_layer其实是PatchEmbed</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PatchEmbed</span>(nn.Module):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; 2D Image to Patch Embedding</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, img_size=<span class="number">224</span>, patch_size=<span class="number">16</span>, in_chans=<span class="number">3</span>, embed_dim=<span class="number">768</span>, norm_layer=<span class="literal">None</span>, flatten=<span class="literal">True</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="comment"># img_size = (img_size, img_size)</span></span><br><span class="line">        img_size = to_2tuple(img_size)</span><br><span class="line">        patch_size = to_2tuple(patch_size)</span><br><span class="line">        <span class="variable language_">self</span>.img_size = img_size</span><br><span class="line">        <span class="variable language_">self</span>.patch_size = patch_size</span><br><span class="line">        <span class="variable language_">self</span>.grid_size = (img_size[<span class="number">0</span>] // patch_size[<span class="number">0</span>], img_size[<span class="number">1</span>] // patch_size[<span class="number">1</span>])</span><br><span class="line">        <span class="variable language_">self</span>.num_patches = <span class="variable language_">self</span>.grid_size[<span class="number">0</span>] * <span class="variable language_">self</span>.grid_size[<span class="number">1</span>]</span><br><span class="line">        <span class="variable language_">self</span>.flatten = flatten</span><br><span class="line">        <span class="comment"># 输入通道，输出通道，卷积核大小，步长</span></span><br><span class="line">        <span class="comment"># C*H*W-&gt;embed_dim*grid_size*grid_size</span></span><br><span class="line">        <span class="variable language_">self</span>.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)</span><br><span class="line">        <span class="variable language_">self</span>.norm = norm_layer(embed_dim) <span class="keyword">if</span> norm_layer <span class="keyword">else</span> nn.Identity()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        B, C, H, W = x.shape</span><br><span class="line">        <span class="keyword">assert</span> H == <span class="variable language_">self</span>.img_size[<span class="number">0</span>] <span class="keyword">and</span> W == <span class="variable language_">self</span>.img_size[<span class="number">1</span>], \</span><br><span class="line">            <span class="string">f&quot;Input image size (<span class="subst">&#123;H&#125;</span>*<span class="subst">&#123;W&#125;</span>) doesn&#x27;t match model (<span class="subst">&#123;self.img_size[<span class="number">0</span>]&#125;</span>*<span class="subst">&#123;self.img_size[<span class="number">1</span>]&#125;</span>).&quot;</span></span><br><span class="line">        x = <span class="variable language_">self</span>.proj(x)</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.flatten:</span><br><span class="line">            x = x.flatten(<span class="number">2</span>).transpose(<span class="number">1</span>, <span class="number">2</span>)  <span class="comment"># BCHW -&gt; BNC</span></span><br><span class="line">        x = <span class="variable language_">self</span>.norm(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p>proj虽然用的是卷积的写法，但其实是将每个patch接入了同样的全连接网络，将每个patch转换成了一个向量。x的维度是（B，C，H，W）其中B是batch size，C通常是三通道，H和W分别是图片的高和宽，而输出则是（B，N，E），B依然是batch size，N则是每张图被切割成了patch之后，patch的数量，E是embed_size，每个patch会通过一个全连接网络转换成一个向量，E是这个向量的长度，根据卷积的原理，也可以理解为每个patch的特征数量。</p>
+<h3 id="2-Positional-Embedding">2. Positional Embedding</h3>
+<p>因为Transformer是无序的，所以要给每个patch加上位置信息，把图片分割成了patch，然后把每个patch转换成了embedding，接下来就是在embedding中加入位置信息。产生位置信息的方式主要分两大类，一类是直接通过固定算法产生，一种是训练获得。但加位置信息的方式还是比较统一且粗暴的。</p>
+<p><img src="/images/positional_embedding_1.jpg" alt="img" /></p>
+<p>产生一个位置向量，长度和patch embedding一致，然后直接相加。那么这个位置向量大概长下面这样</p>
+<p><img src="/images/positional_embedding_2.jpg" alt="img" /></p>
+<p>比如patch embedding长度为4，那么位置向量长度也为4，每个位置有一个在[-1,1]的值</p>
+<p><img src="/images/positional_embedding_3.jpg" alt="img" /></p>
+<p>假设你现在一张图切成了20个patch，embedding的长度是512，那么位置向量可以是上面这样的（tensor2tensor中的get_timing_signal_1d函数），每一行代表一个位置向量，第一行是位置0的位置向量，第二行是位置1的位置向量。</p>
+<p>位置向量也可以是下面这样的：</p>
+<p><img src="/images/positional_embedding_4.jpg" alt="img" /></p>
+<p>公式如下：</p>
+<p>$$PE_{(pos,2i)}=sin(pos/10000^{2i/d_model}) \ PE_{(pos,2i+1)}=cos(pos/10000^{2i/d_model})$$</p>
+<p>pos是单词在句子中的位置，或者patch在图中的位置，而i对应的是embedding的位置，dmodel对应的是patch embedding的长度，。这里说一下为什么要加这个位置编码，以及加上以后会有什么效果，我们观察上两幅图，可以发现，位置编码是随位置而改变的，位置差别越大的，那么向量差别也越大。在NLP里说过，把一个词转换成向量，就好像把一个词映射到了一个高维空间的位置，意思相近的词会在高维空间内比较靠近，而加上位置向量，会让位置相近的词更靠近，位置远的词离得更远。再来，为什么用cos，sin这种方式，作者的解释是，使用sin和cos编码可以得到词语之间的相对位置。</p>
+<p>timm中对positional encoding的实现：</p>
+<p><img src="/images/timmpositionalencoding.jpg" alt="img" /></p>
+<p>可以发现timm中的positional encoding是随机数，也就是说没有做positional encoding，可能只是给你留了个位置，而默认的值服从某种正太分布，且限于很小的数值区间，这里就不上代码和详细解释了。至于这里为什么是随机数。一个是保留位置，便你扩展，二是本来positional encoding就有两类方式可以实现，一种是用一定的算法生成，另外一种就是通过训练调整获得。timm应该是默认是通过训练来调整获得</p>
+<h3 id="3-Self-Attention">3. Self-Attention</h3>
+<p>ViT中的Attention，和Transformer中的self-attention一致，参考[1]介绍self-attention，举例语义处理的例子：</p>
+<p>“The animal didn’t cross the street because it was too tired.”</p>
+<p>我们人很容易理解，后面的it是指animal，但是要怎么让机器能够把it和animal关联起来呢？</p>
+<p><img src="/images/self_attention_1.jpg" alt="img" /></p>
+<p>Self-attention就是在这种需求下产生的，如上图所示，我们应当有一个结构能够表达每个单词和其他每个单词的关系。那这里我们处理的是图像问题，Self-attention的存在就可以理解成，我们应当有一个结构能够表达每个patch和其他patch的关系。之前说过，图像中的patch和语义处理中的词可以同等来看</p>
+<p>具体实现:</p>
+<ol>
+<li>
+<p>基于输入向量创建三个向量：query向量，key向量和value向量</p>
+<p><img src="/images/qkv1.jpg" alt="img" /></p>
+<p>==注：$W^Q$是一个参数矩阵（权重矩阵），用于把输入的每个单词的embedding向量x线性变换成query向量q==</p>
+</li>
+<li>
+<p>由query向量和key向量产生自注意力</p>
+<p><img src="/images/qkv2.jpg" alt="img" /></p>
+<p>Thinking和Machine可以理解为图片被切分的两个patch，现在计算Thinking的自注意力，通过q乘k，除以一定系数（<strong>scaled dot-product attention</strong>，点积得到的结果值通常很大，使得softmax结果不能很好地表达attention值。这时候除以一个缩放因子，可以一定程度上减缓这种情况。），通过softmax之后会得到一个关于Thinking的注意力向量，比如这个例子是[0.88, 0.12]，这个向量的意思是，要解释Thinking这个词在这个句子中的意思，应当取0.88份Thinking原本的意思，再取0.12份Machine原本的意思，就是Thinking在这个句子中的意思。最后图中Sum之后的结果所表达的就是每个单词在这个句子当中的意思。整个过程可以用下面这张图表达</p>
+<p><img src="/images/qkv3.jpg" alt="img" /></p>
+</li>
+</ol>
+<h3 id="4-Multi-Head-Attention">4. Multi-Head Attention</h3>
+<p>timm中attention是在self-attention基础上改进的multihead attention，也就是在产生qkv的时候，对qkv进行切分，切分成了num_heads份，对每一份分别进行self-attention的操作，最后拼接起来，这样一定程度上进行了参数隔离，至于为什么效果会更好，大概率是因为这样操作会让关联特征集中在一起，更容易训练</p>
+<p><img src="/images/multihead.jpg" alt="img" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Attention</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, dim, num_heads=<span class="number">8</span>, qkv_bias=<span class="literal">False</span>, attn_drop=<span class="number">0.</span>, proj_drop=<span class="number">0.</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.num_heads = num_heads</span><br><span class="line">        <span class="comment"># q,k,v向量长度</span></span><br><span class="line">        head_dim = dim // num_heads</span><br><span class="line">        <span class="variable language_">self</span>.scale = head_dim ** -<span class="number">0.5</span></span><br><span class="line">        <span class="variable language_">self</span>.qkv = nn.Linear(dim, dim * <span class="number">3</span>, bias=qkv_bias)</span><br><span class="line">        <span class="variable language_">self</span>.attn_drop = nn.Dropout(attn_drop)</span><br><span class="line">        <span class="variable language_">self</span>.proj = nn.Linear(dim, dim)</span><br><span class="line">        <span class="variable language_">self</span>.proj_drop = nn.Dropout(proj_drop)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># 这里C对应上面的E，向量的长度</span></span><br><span class="line">        B, N, C = x.shape</span><br><span class="line">        <span class="comment"># (B, N, C) -&gt; (3，B，num_heads, N, C//num_heads), //是向下取整的意思。</span></span><br><span class="line">        qkv = <span class="variable language_">self</span>.qkv(x).reshape(B, N, <span class="number">3</span>, <span class="variable language_">self</span>.num_heads, C // <span class="variable language_">self</span>.num_heads).permute(<span class="number">2</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>)</span><br><span class="line">        <span class="comment"># 将qkv在0维度上切成三个数据块，q,k,v:(B，num_heads, N, C//num_heads)</span></span><br><span class="line">        <span class="comment"># 这里的效果是从每个向量产生三个向量，分别是query，key和value</span></span><br><span class="line">        q, k, v = qkv.unbind(<span class="number">0</span>)   <span class="comment"># make torchscript happy (cannot use tensor as tuple)</span></span><br><span class="line">        <span class="comment"># @矩阵相乘获得score (B,num_heads,N,N)</span></span><br><span class="line">        attn = (q @ k.transpose(-<span class="number">2</span>, -<span class="number">1</span>)) * <span class="variable language_">self</span>.scale</span><br><span class="line">        attn = attn.softmax(dim=-<span class="number">1</span>)</span><br><span class="line">        attn = <span class="variable language_">self</span>.attn_drop(attn)</span><br><span class="line">        <span class="comment"># (B,num_heads,N,N)@(B,num_heads,N,C//num_heads)-&gt;(B,num_heads,N,C//num_heads)</span></span><br><span class="line">        <span class="comment"># (B,num_heads,N,C//num_heads) -&gt;(B,N,num_heads,C//num_heads)</span></span><br><span class="line">        <span class="comment"># (B,N,num_heads,C//num_heads) -&gt; (B, N, C)</span></span><br><span class="line">        x = (attn @ v).transpose(<span class="number">1</span>, <span class="number">2</span>).reshape(B, N, C)</span><br><span class="line">        <span class="comment"># (B, N, C) -&gt; (B, N, C)</span></span><br><span class="line">        x = <span class="variable language_">self</span>.proj(x)</span><br><span class="line">        x = <span class="variable language_">self</span>.proj_drop(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p>multi-head attention总示意图如下：</p>
+<p><img src="/images/overallmultihead.jpg" alt="img" /></p>
+<h3 id="5-Layer-Normalization">5. Layer Normalization</h3>
+<p>Layer normalization对应的一个概念是我们熟悉的Batch Normalization，这两个根本的不同在于，Layer normalization是对每个样本的所有特征进行归一化，而Batch Normalization是对每个通道的所有样本进行归一化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NLP Example</span></span><br><span class="line">batch, sentence_length, embedding_dim = <span class="number">20</span>, <span class="number">5</span>, <span class="number">10</span></span><br><span class="line">embedding = torch.randn(batch, sentence_length, embedding_dim)</span><br><span class="line"><span class="comment"># 指定归一化的维度</span></span><br><span class="line">layer_norm = nn.LayerNorm(embedding_dim)</span><br><span class="line"><span class="comment"># 进行归一化</span></span><br><span class="line">layer_norm(embedding)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Image Example</span></span><br><span class="line">N, C, H, W = <span class="number">20</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">10</span></span><br><span class="line"><span class="built_in">input</span> = torch.randn(N, C, H, W)</span><br><span class="line"><span class="comment"># Normalize over the last three dimensions (i.e. the channel and spatial dimensions)</span></span><br><span class="line"><span class="comment"># as shown in the image below</span></span><br><span class="line">layer_norm = nn.LayerNorm([C, H, W])</span><br><span class="line">output = layer_norm(<span class="built_in">input</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/layernormalization.jpg" alt="img" /></p>
+<p>在ViT中，虽然LN处理的是图片数据，但在进行LN之前，图片已经被切割成了Patch，而每个Patch表示的是一个词，因此是在用语义的逻辑在解决视觉问题，因此在ViT中，LN也是按语义的逻辑在用的</p>
+<h3 id="6-Drop-Path">6. Drop Path</h3>
+<p>Dropout是最早用于解决网络过拟合的方法，是所有drop类方法的始祖。</p>
+<p><img src="/images/dropout.jpg" alt="img" /></p>
+<p>在向前传播的时候，让神经元以一定概率停止工作。这样可以使模型泛化能力变强，因为神经元会以一定概率失效，这样的机制会使结果不会过分依赖于个别神经元。训练阶段，以keep_prob概率使神经元失效，而推理的时候，会保留所有神经元的有效性，因此，训练时候加了dropout的神经元推理出来的结果要除以keep_prob。</p>
+<p>接下来以dropout的思路来理解drop path</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">drop_path</span>(<span class="params">x, drop_prob: <span class="built_in">float</span> = <span class="number">0.</span>, training: <span class="built_in">bool</span> = <span class="literal">False</span></span>):</span><br><span class="line">    <span class="keyword">if</span> drop_prob == <span class="number">0.</span> <span class="keyword">or</span> <span class="keyword">not</span> training:</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="comment"># drop_prob是进行droppath的概率</span></span><br><span class="line">    keep_prob = <span class="number">1</span> - drop_prob</span><br><span class="line">    <span class="comment"># work with diff dim tensors, not just 2D ConvNets</span></span><br><span class="line">    <span class="comment"># 在ViT中，shape是(B,1,1),B是batch size</span></span><br><span class="line">    shape = (x.shape[<span class="number">0</span>],) + (<span class="number">1</span>,) * (x.ndim - <span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 按shape,产生0-1之间的随机向量,并加上keep_prob  </span></span><br><span class="line">    random_tensor = keep_prob + torch.rand(shape, dtype=x.dtype, device=x.device)</span><br><span class="line">    <span class="comment"># 向下取整，二值化，这样random_tensor里1出现的概率的期望就是keep_prob</span></span><br><span class="line">    random_tensor.floor_()  <span class="comment"># binarize</span></span><br><span class="line">    <span class="comment"># 将一定图层变为0</span></span><br><span class="line">    output = x.div(keep_prob) * random_tensor</span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+<p>由代码可以看出，drop path是在batch那个维度，随机将一些图层直接变成0，以加快运算速度。</p>
+<h3 id="Transformer-Encoder">Transformer Encoder</h3>
+<p>Transformer架构图</p>
+<p><img src="/images/Transformer.jpg" alt="img" /></p>
+<p>Transformer是由一堆encoder和decoder形成的，那encoder一般的架构图如下</p>
+<p><img src="/images/encoder.jpg" alt="img" /></p>
+<p>输入[CLS] token + Patch Embeddings + Position Embeddings</p>
+<p>经过多层Transformer Encoder（自注意力机制+前馈网络）</p>
+<p>最后用[CLS] token输出的向量进行分类</p>
+<p>（CLS token是一个专门加在最前面的learnable向量，用来汇总全局信息</p>
+<p>Encoder在ViT中的实现细节如下面代码所示（layer normalization -&gt; multi-head attention -&gt; drop path -&gt; layer normalization -&gt; mlp -&gt; drop path），换了个名字，叫block了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Block</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, dim, num_heads, mlp_ratio=<span class="number">4.</span>, qkv_bias=<span class="literal">False</span>, drop=<span class="number">0.</span>, attn_drop=<span class="number">0.</span>,</span></span><br><span class="line"><span class="params">                 drop_path=<span class="number">0.</span>, act_layer=nn.GELU, norm_layer=nn.LayerNorm</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="comment"># 将每个样本的每个通道的特征向量做归一化</span></span><br><span class="line">        <span class="comment"># 也就是说每个特征向量是独立做归一化的</span></span><br><span class="line">        <span class="comment"># 我们这里虽然是图片数据，但图片被切割成了patch，用的是语义的逻辑</span></span><br><span class="line">        <span class="variable language_">self</span>.norm1 = norm_layer(dim)</span><br><span class="line">        <span class="variable language_">self</span>.attn = Attention(dim, num_heads=num_heads, qkv_bias=qkv_bias, attn_drop=attn_drop, proj_drop=drop)</span><br><span class="line">        <span class="comment"># <span class="doctag">NOTE:</span> drop path for stochastic depth, we shall see if this is better than dropout here</span></span><br><span class="line">        <span class="variable language_">self</span>.drop_path = DropPath(drop_path) <span class="keyword">if</span> drop_path &gt; <span class="number">0.</span> <span class="keyword">else</span> nn.Identity()</span><br><span class="line">        <span class="variable language_">self</span>.norm2 = norm_layer(dim)</span><br><span class="line">        mlp_hidden_dim = <span class="built_in">int</span>(dim * mlp_ratio)</span><br><span class="line">        <span class="comment"># 全连接，激励，drop，全连接，drop,若out_features没填，那么输出维度不变。</span></span><br><span class="line">        <span class="variable language_">self</span>.mlp = Mlp(in_features=dim, hidden_features=mlp_hidden_dim, act_layer=act_layer, drop=drop)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="comment"># 最后一维归一化，multi-head attention, drop_path</span></span><br><span class="line">        <span class="comment"># (B, N, C) -&gt; (B, N, C)</span></span><br><span class="line">        x = x + <span class="variable language_">self</span>.drop_path(<span class="variable language_">self</span>.attn(<span class="variable language_">self</span>.norm1(x)))</span><br><span class="line">        <span class="comment"># (B, N, C) -&gt; (B, N, C)</span></span><br><span class="line">        x = x + <span class="variable language_">self</span>.drop_path(<span class="variable language_">self</span>.mlp(<span class="variable language_">self</span>.norm2(x)))</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>在ViT中这样的block会有好几层，形成blocks：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># stochastic depth decay rule</span></span><br><span class="line">dpr = [x.item() <span class="keyword">for</span> x <span class="keyword">in</span> torch.linspace(<span class="number">0</span>, drop_path_rate, depth)]</span><br><span class="line"><span class="variable language_">self</span>.blocks = nn.Sequential(*[</span><br><span class="line">    Block(</span><br><span class="line">        dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, drop=drop_rate,</span><br><span class="line">        attn_drop=attn_drop_rate, drop_path=dpr[i], norm_layer=norm_layer, act_layer=act_layer)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(depth)])</span><br></pre></td></tr></table></figure>
+<p>如果drop_path_rate大于0，每一层block的drop_path的会线性增加。depth是一个blocks里block的数量。也可以理解为blocks这个网络块的深度。</p>
+
+            
+                
+            
+        </div>
+
+        
+
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/notes/">notes</a>
+            
+        </div>
+        
+    </article>
+    
+        <p style="text-align: center">声明: 本文内容由Jasper创作整理，读者若需转载，请保留出处，谢谢！</p>
+    
+    
+    
+</div>
+
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            本站已建立&nbsp;<a href="/about" id="siteBuildingTime"></a>&nbsp;天， <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span><br/>
+            ©2025-<span id="cpYear"></span> 基于&nbsp;<a href="http://hexo.io" target="_blank" rel="external nofollow noopener" title="Hexo">Hexo</a>
+            ，主题采用&nbsp;&nbsp;<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="external nofollow noopener" title="JSimple theme">JSimple</a>
+            ，作者&nbsp;<a href="https://github.com/jsp-0615" target="_blank" title="author">Jasper</a>
+            ，托管于&nbsp;<a href="https://pages.github.com" target="_blank" rel="external nofollow noopener" title="github">github</a>
+            ，<a href="https://jsp-0615.github.io/sitemap.xml" title="网站地图" rel="alternate" type="application/xml">网站地图</a>
+        </p>
+    </div>
+</footer>
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input"
+                   spellcheck="true"
+                   type="text"
+                   autocomplete="off"
+                   placeholder="请输入查询关键词"/>
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script async src="/js/SimpleCore.min.js"></script>
+<script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- disqus count -->
+
+    
+
+
+<!-- google analytics -->
+
+
+<!-- ms clarity -->
+
+</body>
+</html>

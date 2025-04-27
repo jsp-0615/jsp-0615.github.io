@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jsp-0615.github.io/knowledgeNotes/2025/04/25/ViT/</loc>
+    
+    <lastmod>2025-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jsp-0615.github.io/knowledgeNotes/2025/04/24/transformers/</loc>
+    
+    <lastmod>2025-04-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jsp-0615.github.io/knowledgeNotes/2025/04/17/Multimodal/</loc>
     
     <lastmod>2025-04-18</lastmod>
@@ -67,7 +85,7 @@
 
   <url>
     <loc>https://jsp-0615.github.io/</loc>
-    <lastmod>2025-04-18</lastmod>
+    <lastmod>2025-04-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -75,7 +93,7 @@
   
   <url>
     <loc>https://jsp-0615.github.io/tags/notes/</loc>
-    <lastmod>2025-04-18</lastmod>
+    <lastmod>2025-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -84,14 +102,14 @@
   
   <url>
     <loc>https://jsp-0615.github.io/categories/knowledgeNotes/</loc>
-    <lastmod>2025-04-18</lastmod>
+    <lastmod>2025-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jsp-0615.github.io/categories/problemNotes/</loc>
-    <lastmod>2025-04-18</lastmod>
+    <lastmod>2025-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

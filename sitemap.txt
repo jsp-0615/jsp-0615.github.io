@@ -1,3 +1,5 @@
+https://jsp-0615.github.io/knowledgeNotes/2025/04/25/ViT/
+https://jsp-0615.github.io/knowledgeNotes/2025/04/24/transformers/
 https://jsp-0615.github.io/knowledgeNotes/2025/04/17/Multimodal/
 https://jsp-0615.github.io/knowledgeNotes/2025/04/16/RNN/
 https://jsp-0615.github.io/knowledgeNotes/2025/04/14/causal-inference/
